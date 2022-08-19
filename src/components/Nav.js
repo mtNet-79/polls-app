@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { setAuthedUser } from "../actions/authedUser";
+
+
 
 const Nav = (props) => {
-  const user = props.users[props.authedUser];
+  console.log("nav props: ", props);
+  const { dispatch, users, authedUser } = props;
+  const user  = users[authedUser];
+
+  const hanldeLogOutOnClick = () => {
+    dispatch(setAuthedUser());
+  }
+
   return (
     <div className="nav">
       <ul>
@@ -22,7 +32,7 @@ const Nav = (props) => {
           <span>{user.id}</span>
         </li>
         <li>
-          <Link to="/login">Logout</Link>
+          <Link to="/login" onClick={hanldeLogOutOnClick}>Logout</Link>
         </li>
       </ul>
     </div>

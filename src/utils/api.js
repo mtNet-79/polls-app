@@ -11,9 +11,9 @@ export function generateRandomAvatar() {
 }
 
 export function getInitialData() {
-  return Promise.all([_getUsers(), _getPolls()]).then(([users, questions]) => ({
+  return Promise.all([_getUsers(), _getPolls()]).then(([users, polls]) => ({
     users,
-    questions,
+    polls,
   }));
 }
 
@@ -22,6 +22,7 @@ export function saveUser(info) {
 }
 
 export function savePoll(info) {
+  console.log(" info : ", info);
   return _savePoll(info);
 }
 

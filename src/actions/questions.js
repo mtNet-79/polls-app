@@ -4,7 +4,7 @@ import { savePoll, saveAnswerPoll } from "../utils/api";
 export const ANSWER_POLL = "ANSWER_POLL";
 export const ADD_POLL = "ADD_POLL";
 
-const answerPoll = ({ authedUser, pid, answer }) => {
+export const answerPoll = ({ authedUser, pid, answer }) => {
   return {
     type: ANSWER_POLL,
     authedUser,
@@ -13,18 +13,17 @@ const answerPoll = ({ authedUser, pid, answer }) => {
   };
 };
 
-const addPoll = (poll) => ({
+export const addPoll = (poll) => ({
   type: ADD_POLL,
   poll,
 });
 
 export function handleAnswerPoll(authedUser, pid, answer) {
-  return (dpatch) => {
-    dpatch(showLoading());
+  return (dispatch) => {
+    dispatch(showLoading());
     return saveAnswerPoll({ authedUser, pid, answer })
       .then((obj) => {
-        console.log("what up: ", obj);
-        dpatch(
+        dispatch(
           answerPoll({
             authedUser,
             pid,
@@ -32,11 +31,10 @@ export function handleAnswerPoll(authedUser, pid, answer) {
           })
         );
       })
-      .then(() => dpatch(hideLoading()))
-      .catch((obj) => {
-        console.log("not good: ", obj);
-        alert("An error occured. Try again.");
-        dpatch(hideLoading());
+      .then(() => dispatch(hideLoading()))
+      .catch((err) => {
+        alert(err.message);
+        dispatch(hideLoading());
       });
   };
 }

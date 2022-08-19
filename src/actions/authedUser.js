@@ -1,5 +1,3 @@
-import { showLoading, hideLoading } from "react-redux-loading-bar";
-
 export const SET_AUTHED_USER = "SET_AUTHED_USER";
 
 export const setAuthedUser = (id) => ({
@@ -7,21 +5,14 @@ export const setAuthedUser = (id) => ({
   id,
 });
 
-export const handleLogIn = (user) => {  
-    return (dpatch) => {
-      // dpatch(showLoading());
-      
-        dpatch(setAuthedUser(user))
-    
+// export const handleLogIn = (user) => {
+//   return (dpatch) => {
+//     dpatch(setAuthedUser(user));
+//   };
+// };
 
-    }
-    // return saveUser({ user, src, password })
-    //   .then((user) => {
-    //     dpatch(addUser(user));
-    //   })
-    //   .then(() => dpatch(hideLoading()))
-    //   .catch(() => {
-    //     alert("An error occured. Try again.");
-    //   });
- 
-};
+// export const handleLogOut = () => {
+//   return (dpatch) => {
+//     dpatch(setAuthedUser());
+//   };
+// };

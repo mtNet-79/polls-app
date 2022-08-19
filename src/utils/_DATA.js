@@ -175,25 +175,29 @@ export function _savePoll(poll) {
   });
 }
 
-export function _saveUser(info) {
-  const { user, src, password } = info;
-  return new Promise((resolve) => {
-    const formattedUser = formatUser({ user, src, password });
-    setTimeout(() => {
-      users = {
-        ...users,
-        [user.id]: formattedUser,
-      };
+export function _saveUser(info) {  
+  return new Promise((resolve, reject) => {
+    const formattedUser = formatUser(info);
+    if(formattedUser){
+      setTimeout(() => {
+        users = {
+          ...users,
+          [formattedUser.id]: formattedUser,
+        };
 
-      resolve(formattedUser);
-    }, 1000);
+        resolve(formattedUser);
+      }, 1000);
+      
+      
+    } else {a
+      reject("Please provide a unique user name");
+    }
   });
 }
-
-export function _savePollAnswer({ authedUser, pid, answer }) {
-  console.log(
-    `_saveQuestionAnswer is ${authedUser} , pid is  ${pid} and answer is ${answer}`
-  );
+let count = 0;
+export function _savePollAnswer({ authedUser, pid, answer }) {  
+  count ++;
+  console.log("count: ", count);
   return new Promise((resolve, reject) => {
     if (!authedUser || !pid || !answer) {
       reject("Please provide authedUser, pid, and answer");
@@ -225,3 +229,4 @@ export function _savePollAnswer({ authedUser, pid, answer }) {
     }, 500);
   });
 }
+

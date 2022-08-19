@@ -11,10 +11,18 @@ const LogIn = (props) => {
   const [formReady, setFormReady] = useState(false);
   const navigate = useNavigate();
   const { dispatch, image, users } = props;
+  
 
   const checkForm = (e) => {
     if (e.target.id === "fullName") setFullName(e.target.value);
-    if (e.target.id === "userName") setUserName(e.target.value);
+    if (e.target.id === "userName") {
+      Object.keys(users).forEach((userId) => {
+        userName === userId 
+            ? alert('This user name is already taken.')
+            : setUserName(e.target.value);
+      })
+      setUserName(e.target.value);
+    }
     else if (e.target.id === "password") setPassword(e.target.value);
     if (fullName !== "" && password !== "" && password.length > 5)
       setFormReady(true);
@@ -22,8 +30,12 @@ const LogIn = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(handleAddUser(fullName, image, password));
+    // alert('what');
+  
+   
+      userName 
+        ? dispatch(handleAddUser({fullName, image, password, userName})) 
+        : dispatch(handleAddUser({fullName, image, password, users}))    
     navigate("/");
   };
 

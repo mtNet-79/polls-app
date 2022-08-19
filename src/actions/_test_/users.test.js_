@@ -1,0 +1,60 @@
+import { ADD_USER, handleAddUser, addUser } from "../users";
+
+import "jest-redux-thunk";
+import { saveUser } from "../../utils/api";
+import { formatUser } from "../../utils/helpers";
+
+describe("addUser", () => {
+  it("should create action with ADD_USER type", () => {
+    let user = {};
+    expect(addUser(user)).toEqual({
+      type: ADD_USER,
+      user,
+    });
+  });
+});
+
+describe("handleAddUser", () => {
+  it("should add poll and return a formatted object", async () => {
+    expect.assertions(1);
+    const poll = {
+      optionOneText: "some text",
+      optionTwoText: "option two text",
+      author: "mthornton",
+    };
+    const savePollAPI = await savePoll(poll);
+    console.log("savePollAPI: ", savePollAPI);
+    expect(savePollAPI.author).toEqual(formatPoll(poll).author);
+  });
+  it("tests error mesage", async () => {
+    expect.assertions(1);
+    await expect(savePoll("some text")).rejects.toEqual(
+      "Please provide optionOneText, optionTwoText, and author"
+    );
+  });
+  it("dispatches action with type ADD_POLL", () => {
+    const dispatchMock = jest.fn();
+    handleAddUser(dispatchMock(addPoll({})));
+
+    expect(dispatchMock).toBeDispatchedWithActionType(ADD_POLL);
+  });
+
+  it("dispatches ADD_POLL action", () => {
+    const dispatchMock = jest.fn();
+
+    handleAddUser(
+      dispatchMock({
+        type: "ADD_USER",
+        fullName,
+        image,
+        password,
+        userName,
+        users,
+      })
+    );
+
+    expect(dispatchMock).toBeDispatchedWithAction({
+      type: "ADD_USER",
+    });
+  });
+});

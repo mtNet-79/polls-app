@@ -14,17 +14,11 @@ export default function questions(pollQuestions = initialState, action) {
       };
     case ANSWER_POLL:
       const { authedUser, pid, answer } = action;
-      let optionObj = {};
+      let votes = [];
       if (answer === "optionOne") {
-        optionObj = {
-          votes: [...pollQuestions[pid].optionOne.votes, authedUser],
-          text: pollQuestions[pid].optionOne.text,
-        };
-      } else {
-        optionObj = {
-          votes: [...pollQuestions[pid].optionTwo.votes, authedUser],
-          text: pollQuestions[pid].optionTwo.text,
-        };
+        votes = [...pollQuestions[pid].optionOne.votes, authedUser];
+      } else if (answer === "optionTwo"){       
+        votes = [...pollQuestions[pid].optionTwo.votes, authedUser];
       }
       return {
         ...pollQuestions,
@@ -32,17 +26,23 @@ export default function questions(pollQuestions = initialState, action) {
           ...pollQuestions[pid],
           optionOne:
             answer === "optionOne"
-              ? { ...pollQuestions[pid].optionOne, optionObj }
+              ? {
+                  ...pollQuestions[pid].optionOne,
+                  votes: votes,                  
+                }
               : { ...pollQuestions[pid].optionOne },
           optionTwo:
             answer === "optionTwo"
-              ? { ...pollQuestions[pid].optionTwo, optionObj }
+              ? {
+                ...pollQuestions[pid].optionTwo,
+                votes: votes,                  
+              }
               : { ...pollQuestions[pid].optionTwo },
         },
       };
 
     case RECEIVE_DATA:
-      return action.questions;
+      return action.polls;
     default:
       return pollQuestions;
   }

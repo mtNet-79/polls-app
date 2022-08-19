@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { handleAddUser } from "../actions/users";
-import { handleLogIn } from "../actions/authedUser";
+// import { handleAddUser } from "../actions/users";
+import { setAuthedUser } from "../actions/authedUser";
 // WHEN PAGE OPENS RENDER NEW USER OBJ WITH NEW RANDOM IMAGE
 // IF USER SUBMITS NAME AND PASSWORD ADD TO THE OBJECT THEN SUBMIT THE OBJECT TO DISPATCH
 const LogIn = (props) => {
@@ -23,7 +23,7 @@ const LogIn = (props) => {
     e.preventDefault();
     if (users[user]) {
       if (users[user].password === password) {
-        dispatch(handleLogIn(user));
+        dispatch(setAuthedUser(user));
         navigate("/");
       } else {
         alert("Wrong password. Try again.");

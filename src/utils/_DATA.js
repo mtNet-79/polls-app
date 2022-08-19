@@ -189,7 +189,7 @@ export function _saveUser(info) {
       }, 1000);
       
       
-    } else {a
+    } else {
       reject("Please provide a unique user name");
     }
   });

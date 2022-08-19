@@ -2,7 +2,11 @@
 import {
   SET_AUTHED_USER,
   setAuthedUser,
+  handleLogIn,
+  handleLogOut
 } from "../authedUser";
+
+import "jest-redux-thunk";
 
 describe("setAuthedUser", () => {
   it("should take an id string create an action based on that id", () => {
@@ -18,5 +22,6 @@ describe("setAuthedUser", () => {
       type: SET_AUTHED_USER,
     });
   });
+
 });
 

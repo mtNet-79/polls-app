@@ -1,6 +1,6 @@
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 import { saveUser } from "../utils/api";
-import { handleLogIn } from "./authedUser";
+import { setAuthedUser } from "./authedUser";
 
 export const ADD_USER = "ADD_USER";
 
@@ -15,7 +15,7 @@ export const handleAddUser = ({fullName, image, password, userName, users}) => {
     return saveUser({ fullName, image, password, userName, users })
       .then((user) => {
         dpatch(addUser(user));
-        dpatch(handleLogIn(user.id));
+        dpatch(setAuthedUser(user.id));
       })
       .then(() => dpatch(hideLoading()))
       .catch((err) => {

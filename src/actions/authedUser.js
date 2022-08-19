@@ -5,14 +5,14 @@ export const setAuthedUser = (id) => ({
   id,
 });
 
-export const handleLogIn = (user) => {
-  return (dpatch) => {
-    dpatch(setAuthedUser(user));
-  };
-};
+// export const handleLogIn = (user) => {
+//   return (dpatch) => {
+//     dpatch(setAuthedUser(user));
+//   };
+// };
 
-export const handleLogOut = () => {
-  return (dpatch) => {
-    dpatch(setAuthedUser());
-  };
-};
+// export const handleLogOut = () => {
+//   return (dpatch) => {
+//     dpatch(setAuthedUser());
+//   };
+// };

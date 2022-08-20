@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { handleAddUser } from "../actions/users";
+import { handleAddUser } from "../actions/addUser";
 // WHEN PAGE OPENS RENDER NEW USER OBJ WITH NEW RANDOM IMAGE
 // IF USER SUBMITS NAME AND PASSWORD ADD TO THE OBJECT THEN SUBMIT THE OBJECT TO DISPATCH
 const LogIn = (props) => {

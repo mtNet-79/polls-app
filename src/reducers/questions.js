@@ -1,6 +1,6 @@
 import { RECEIVE_DATA } from "../actions/shared";
-import { ANSWER_POLL } from "../actions/questions";
-import { ADD_POLL } from "../actions/questions";
+import { ANSWER_POLL } from "../actions/answerPoll";
+import { ADD_POLL } from "../actions/createPoll";
 
 const initialState = {};
 
@@ -13,13 +13,12 @@ export default function questions(pollQuestions = initialState, action) {
         [poll.id]: poll,
       };
     case ANSWER_POLL:
-      const { authedUser, pid, answer } = action;
+      const { authedUser, pid, answer } = action;    
       let votes = [];
-      if (answer === "optionOne") {
-        votes = [...pollQuestions[pid].optionOne.votes, authedUser];
-      } else if (answer === "optionTwo"){       
-        votes = [...pollQuestions[pid].optionTwo.votes, authedUser];
-      }
+      answer === "optionOne"
+        ? (votes = [...pollQuestions[pid].optionOne.votes, authedUser])
+        : (votes = [...pollQuestions[pid].optionTwo.votes, authedUser]);
+
       return {
         ...pollQuestions,
         [pid]: {
@@ -28,15 +27,15 @@ export default function questions(pollQuestions = initialState, action) {
             answer === "optionOne"
               ? {
                   ...pollQuestions[pid].optionOne,
-                  votes: votes,                  
+                  votes,
                 }
               : { ...pollQuestions[pid].optionOne },
           optionTwo:
             answer === "optionTwo"
               ? {
-                ...pollQuestions[pid].optionTwo,
-                votes: votes,                  
-              }
+                  ...pollQuestions[pid].optionTwo,
+                  votes,
+                }
               : { ...pollQuestions[pid].optionTwo },
         },
       };

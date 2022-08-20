@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { handleAnswerPoll } from "../actions/questions";
+import { handleAnswerPoll } from "../actions/answerPoll";
 import { Fragment } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 const OPTION_ONE = "optionOne";

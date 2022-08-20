@@ -22,7 +22,6 @@ export function saveUser(info) {
 }
 
 export function savePoll(info) {
-  console.log(" info : ", info);
   return _savePoll(info);
 }
 

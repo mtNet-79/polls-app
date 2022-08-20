@@ -2,8 +2,6 @@
 import {
   SET_AUTHED_USER,
   setAuthedUser,
-  handleLogIn,
-  handleLogOut
 } from "../authedUser";
 
 import "jest-redux-thunk";

@@ -196,8 +196,6 @@ export function _saveUser(info) {
 }
 let count = 0;
 export function _savePollAnswer({ authedUser, pid, answer }) {  
-  count ++;
-  console.log("count: ", count);
   return new Promise((resolve, reject) => {
     if (!authedUser || !pid || !answer) {
       reject("Please provide authedUser, pid, and answer");

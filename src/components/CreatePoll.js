@@ -2,8 +2,7 @@ import { Fragment } from "react";
 import { useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { handleAddPoll } from "../actions/questions";
-import authedUser from "../reducers/authedUser";
+import { handleAddPoll } from "../actions/createPoll";
 
 const CreatePoll = (props) => {
     

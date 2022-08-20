@@ -35,7 +35,7 @@ const LogIn = (props) => {
     setUser("");
     setPassword("");
   };
-  const handleAddUser = () => {
+  const toAddUserForm = () => {
     navigate("/add-user");
   };
   //TODO: create random image
@@ -80,7 +80,7 @@ const LogIn = (props) => {
           type="button"
           className="btn add-new-btn"
           value="Add New User"
-          onClick={handleAddUser}
+          onClick={toAddUserForm}
         />
       </div>
     </div>

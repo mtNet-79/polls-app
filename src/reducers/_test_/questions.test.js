@@ -1,10 +1,10 @@
 import questions from "../questions";
 import { RECEIVE_DATA } from "../../actions/shared";
-import { ANSWER_POLL, ADD_POLL } from "../../actions/questions";
-import { getInitialData } from "../../utils/api";
+import { ANSWER_POLL } from "../../actions/answerPoll";
+import { ADD_POLL } from "../../actions/createPoll";
+import { formatPoll } from "../../utils/helpers";
 
-
-const pollQuestions = {
+const mock_pollQuestions = {
   xj352vofupe1dqz9emx13r: {
     id: "xj352vofupe1dqz9emx13r",
     author: "mtsamis",
@@ -37,11 +37,10 @@ describe("questions reducer", () => {
   it("should return an empty object as initial state", () => {
     expect(questions(undefined, {})).toEqual({});
   });
-  // it("should show on page load", () => {
-  //   expect(loading(undefined)).toEqual(true);
-  // });
-  it("should return all polls from api", async () => {
-    const polls = await getInitialData().then(({ polls }) => polls);
+
+  it("should return data passed to it as new state", async () => {
+    // const polls = await getInitialData().then(({ polls }) => polls);
+    const polls = { polls: "poll" };
     expect(
       questions(
         {},
@@ -53,57 +52,107 @@ describe("questions reducer", () => {
     ).toEqual(polls);
   });
 
-  it("should have case to answer poll for option one", () => {
+  it("should take three params and return new state based on answer given", () => {
+    expect.assertions(2);
+    const authedUser = "mthornton";
+    const pid = "xj352vofupe1dqz9emx13r";
+
+    let answer = "optionOne";
+
+    expect(
+      questions(mock_pollQuestions, {
+        type: ANSWER_POLL,
+        authedUser,
+        pid,
+        answer,
+      })
+    ).toEqual({
+      ...mock_pollQuestions,
+      [pid]: {
+        ...mock_pollQuestions[pid],
+        optionOne: {
+          ...mock_pollQuestions[pid].optionOne,
+          votes: [...mock_pollQuestions[pid].optionOne.votes, authedUser],
+        },
+      },
+    });
+
+    answer = "optionTwo";
+    expect(
+      questions(mock_pollQuestions, {
+        type: ANSWER_POLL,
+        authedUser,
+        pid,
+        answer,
+      })
+    ).toEqual({
+      ...mock_pollQuestions,
+      [pid]: {
+        ...mock_pollQuestions[pid],
+        optionTwo: {
+          ...mock_pollQuestions[pid].optionTwo,
+          votes: [...mock_pollQuestions[pid].optionTwo.votes, authedUser],
+        },
+      },
+    });
+  });
+
+  it("should NOT supply other options with users vote", () => {
     const authedUser = "mthornton";
     const pid = "xj352vofupe1dqz9emx13r";
     const answer = "optionOne";
 
     expect(
-      questions(
-        pollQuestions,
-        {
-          type: ANSWER_POLL,
-          authedUser,
-          pid,
-          answer,
-        }
-      )
-    ).toEqual({
-      ...pollQuestions,
+      questions(mock_pollQuestions, {
+        type: ANSWER_POLL,
+        authedUser,
+        pid,
+        answer,
+      })
+    ).not.toEqual({
+      ...mock_pollQuestions,
       [pid]: {
-        ...pollQuestions[pid],
-        optionOne: {
-          ...pollQuestions[pid].optionOne,
-          votes: [...pollQuestions[pid].optionOne.votes, authedUser],
+        ...mock_pollQuestions[pid],
+        optionTwo: {
+          ...mock_pollQuestions[pid].optionOne,
+          votes: [...mock_pollQuestions[pid].optionOne.votes, authedUser],
         },
       },
     });
+  });
+  it("should take a new formated poll object and returns new state with added poll", () => {
+    expect.assertions(3);
+    let poll = {
+      optionOneText: "some text",
+      optionTwoText: "some other text",
+      author: "mthornton",
+    }
+    poll = formatPoll(poll);
+    expect(
+      Object.keys(
+        questions(mock_pollQuestions, {
+          type: ADD_POLL,
+          poll,
+        })
+      ).length
+    ).toEqual(3);
+
+    expect(
+      Object.values(questions(mock_pollQuestions, {
+        type: ADD_POLL,
+        poll,
+      }))[2].optionOne.text
+    ).toEqual("some text");
+
+    expect(
+      Object.values(questions(mock_pollQuestions, {
+        type: ADD_POLL,
+        poll,
+      }))[2].optionTwo.text
+    ).toEqual("some other text")
+    
+
   });
 
-  it("should have case to answer poll for option two", () => {
-    const authedUser = "mthornton";
-    const pid = "xj352vofupe1dqz9emx13r";
-    const answer = "optionTwo";
-    
-    expect(
-      questions(
-        pollQuestions,
-        {
-          type: ANSWER_POLL,
-          authedUser,
-          pid,
-          answer,
-        }
-      )
-    ).toEqual({
-      ...pollQuestions,
-      [pid]: {
-        ...pollQuestions[pid],
-        optionTwo: {
-          ...pollQuestions[pid].optionTwo,
-          votes: [...pollQuestions[pid].optionTwo.votes, authedUser],
-        },
-      },
-    });
-  });
+  
 });

@@ -1,15 +1,11 @@
 import {
   ANSWER_POLL,
-  ADD_POLL,
   answerPoll,
-  addPoll,
   handleAnswerPoll,
-  handleAddPoll,
-} from "../questions";
+} from "../answerPoll";
 
 import "jest-redux-thunk";
-import { savePoll, saveAnswerPoll } from "../../utils/api";
-import { formatPoll } from "../../utils/helpers";
+import { saveAnswerPoll } from "../../utils/api";
 
 describe("answerPoll", () => {
   it("should create action with ANSWER_POLL type", () => {
@@ -26,15 +22,7 @@ describe("answerPoll", () => {
   });
 });
 
-describe("addPoll", () => {
-  it("should  create action object with new poll obj", () => {
-    const poll = {};
-    expect(addPoll(poll)).toEqual({
-      type: ADD_POLL,
-      poll,
-    });
-  });
-});
+
 
 describe("handleAnswerPoll", () => {
   it("should add authedUser id to votes for answered poll", async () => {

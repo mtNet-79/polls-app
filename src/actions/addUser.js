@@ -10,17 +10,17 @@ export const addUser = (user) => ({
 });
 
 export const handleAddUser = ({fullName, image, password, userName, users}) => {
-  return (dpatch) => {
-    dpatch(showLoading());
+  return (dispatch) => {
+    dispatch(showLoading());
     return saveUser({ fullName, image, password, userName, users })
       .then((user) => {
-        dpatch(addUser(user));
-        dpatch(setAuthedUser(user.id));
+        dispatch(addUser(user));
+        dispatch(setAuthedUser(user.id));
       })
-      .then(() => dpatch(hideLoading()))
+      .then(() => dispatch(hideLoading()))
       .catch((err) => {
         alert(err);
-        dpatch(hideLoading())
+        dispatch(hideLoading())
       });
   };
 };

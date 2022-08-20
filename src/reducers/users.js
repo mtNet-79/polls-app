@@ -1,6 +1,7 @@
 import { RECEIVE_DATA } from "../actions/shared";
-import { ADD_USER } from "../actions/users";
-import { ADD_POLL, ANSWER_POLL } from "../actions/questions";
+import { ADD_USER } from "../actions/addUser";
+import { ADD_POLL } from "../actions/createPoll";
+import { ANSWER_POLL } from "../actions/answerPoll";
 
 export default function users(state = {}, action) {
   switch (action.type) {
@@ -12,7 +13,6 @@ export default function users(state = {}, action) {
       };
     case ANSWER_POLL:
       const { pid, answer, authedUser } = action;
-
       return {
         ...state,
         [authedUser]: {

@@ -4,7 +4,7 @@ This allows a user to answer polls created by other users, create new polls to b
 
 ## Instructions
 
-To use the app the user must b e logged in. If yoour user id is not already in the mock api database, you may add a new user account.
+To use the app the user must be logged in. If your user id is not already in the mock api database, you may add a new user account.
 
 Once a user is logged in they may view polls to be answered and polls they have already answered, with the help of a toggle switch to alternate between the two views.
 

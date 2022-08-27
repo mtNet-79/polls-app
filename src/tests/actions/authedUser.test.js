@@ -2,7 +2,7 @@
 import {
   SET_AUTHED_USER,
   setAuthedUser,
-} from "../authedUser";
+} from "../../actions/authedUser";
 
 import "jest-redux-thunk";
 

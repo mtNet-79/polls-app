@@ -10,6 +10,7 @@ export const addUser = (user) => ({
 });
 
 export const handleAddUser = ({fullName, image, password, userName, users}) => {
+   
   return (dispatch) => {
     dispatch(showLoading());
     return saveUser({ fullName, image, password, userName, users })

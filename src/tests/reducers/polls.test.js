@@ -1,4 +1,4 @@
-import questions from "../questions";
+import polls from "../../reducers/polls";
 import { RECEIVE_DATA } from "../../actions/shared";
 import { ANSWER_POLL } from "../../actions/answerPoll";
 import { ADD_POLL } from "../../actions/createPoll";
@@ -35,21 +35,21 @@ const mock_pollQuestions = {
 
 describe("questions reducer", () => {
   it("should return an empty object as initial state", () => {
-    expect(questions(undefined, {})).toEqual({});
+    expect(polls(undefined, {})).toEqual({});
   });
 
   it("should return data passed to it as new state", async () => {
     // const polls = await getInitialData().then(({ polls }) => polls);
-    const polls = { polls: "poll" };
+    const pollsObj = { polls: "poll" };
     expect(
-      questions(
+      polls(
         {},
         {
           type: RECEIVE_DATA,
-          polls,
+          polls: pollsObj,
         }
       )
-    ).toEqual(polls);
+    ).toEqual(pollsObj);
   });
 
   it("should take three params and return new state based on answer given", () => {
@@ -60,7 +60,7 @@ describe("questions reducer", () => {
     let answer = "optionOne";
 
     expect(
-      questions(mock_pollQuestions, {
+      polls(mock_pollQuestions, {
         type: ANSWER_POLL,
         authedUser,
         pid,
@@ -79,7 +79,7 @@ describe("questions reducer", () => {
 
     answer = "optionTwo";
     expect(
-      questions(mock_pollQuestions, {
+      polls(mock_pollQuestions, {
         type: ANSWER_POLL,
         authedUser,
         pid,
@@ -103,7 +103,7 @@ describe("questions reducer", () => {
     const answer = "optionOne";
 
     expect(
-      questions(mock_pollQuestions, {
+      polls(mock_pollQuestions, {
         type: ANSWER_POLL,
         authedUser,
         pid,
@@ -130,7 +130,7 @@ describe("questions reducer", () => {
     poll = formatPoll(poll);
     expect(
       Object.keys(
-        questions(mock_pollQuestions, {
+        polls(mock_pollQuestions, {
           type: ADD_POLL,
           poll,
         })
@@ -138,14 +138,14 @@ describe("questions reducer", () => {
     ).toEqual(3);
 
     expect(
-      Object.values(questions(mock_pollQuestions, {
+      Object.values(polls(mock_pollQuestions, {
         type: ADD_POLL,
         poll,
       }))[2].optionOne.text
     ).toEqual("some text");
 
     expect(
-      Object.values(questions(mock_pollQuestions, {
+      Object.values(polls(mock_pollQuestions, {
         type: ADD_POLL,
         poll,
       }))[2].optionTwo.text

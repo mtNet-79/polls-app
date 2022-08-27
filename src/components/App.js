@@ -24,8 +24,9 @@ const withRouter = (Component) => {
 };
 
 const App = (props) => {
-  console.log("app props: ", props);
+  // console.log("app props: ", props);
   const [image, setImage] = useState("");
+  const { dispatch, authedUser, loading } = props;
   useEffect(() => {
     const generateRandomAvatar = () => {
       fetch("https://avatar-endpoint.herokuapp.com/api/").then((res) => {
@@ -34,41 +35,50 @@ const App = (props) => {
           const urlCreator = window.URL || window.webkitURL;
           const urlObj = urlCreator.createObjectURL(data);
           setImage(urlObj);
-          props.dispatch(handleInitialData());
+          dispatch(handleInitialData());
         });
       });
     };
 
     const alreadyLoggedIn = () => {
-      props.dispatch(handleInitialData());
+      dispatch(handleInitialData());
     };
 
-    props.authedUser === null ? generateRandomAvatar() : alreadyLoggedIn();
-  }, []);
+    authedUser === null ? generateRandomAvatar() : alreadyLoggedIn();
+  }, [dispatch, authedUser]);
 
   return (
     <Fragment>
       <LoadingBar />
-      {props.loading ? null : (
+      
+      {loading ? null : (
         <div className="container">
-          {props.location.pathname === "/add-user" ? (
-            <AddUser image={image} />
-          ) : props.authedUser ? (
+          {authedUser ? (
             <Fragment>
               <Nav />
               <Routes>
-                <Route path="/" exact element={<Dashboard />} />
-                <Route path="/login" element={<LogIn image={image} />} />
-                <Route path="/new" element={<CreatePoll />} />
-                <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route path="/" element={<Dashboard />} />
+                <Route exact path="/new" element={<CreatePoll />} />
+                <Route exact path="/leaderboard" element={<Leaderboard />} />
                 <Route
-                  path="/questions/:pid"
+                  exact path="/polls/:pid"
                   element={<PollPage image={image} />}
                 />
+                
+                <Route path="*" element={<Dashboard />} />
               </Routes>
             </Fragment>
           ) : (
-            <LogIn image={image} />
+            <Routes>
+              <Route path="/login" element={<LogIn image={image} />} />
+              <Route
+                path="/add-user"
+                exact
+                element={<AddUser image={image} />}
+              />
+              <Route path="*" element={<LogIn image={image} />} />
+              
+            </Routes>
           )}
         </div>
       )}
@@ -76,11 +86,42 @@ const App = (props) => {
   );
 };
 
+
+
+// return (
+//   <Fragment>
+//     <LoadingBar />
+//     {props.loading ? null : (
+//       <div className="container">
+//         {props.location.pathname === "/add-user" ? (
+//           <AddUser image={image} />
+//         ) : props.authedUser ? (
+//           <Fragment>
+//             <Nav />
+//             <Routes>
+//               <Route path="/" exact element={<Dashboard />} />
+//               <Route exact path="/login" element={<LogIn image={image} />} />
+//               <Route exact path="/new" element={<CreatePoll />} />
+//               <Route exact path="/leaderboard" element={<Leaderboard />} />
+//               <Route
+//                 path="/questions/:pid"
+//                 element={<PollPage image={image} />}
+//               />
+//             </Routes>
+//           </Fragment>
+//         ) : (
+//           <LogIn image={image} />
+//         )}
+//       </div>
+//     )}
+//   </Fragment>
+// );
+
 const mapStateToProps = ({ authedUser, loading, users }, props) => {
   // const keys = Object.keys(users);
   const { location } = props.router;
   return {
-    loading: loading,
+    loading,
     authedUser,
     avatarURL: users[authedUser]?.avatarURL,
     location,

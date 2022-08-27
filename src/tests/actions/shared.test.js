@@ -1,4 +1,4 @@
-import { RECEIVE_DATA, recieveData, handleInitialData } from "../shared";
+import { RECEIVE_DATA, recieveData, handleInitialData } from "../../actions/shared";
 
 import { getInitialData } from "../../utils/api";
 import "jest-redux-thunk";
@@ -19,8 +19,6 @@ describe("recieveData", () => {
   });
 
   it("should get all data", async () => {
-    expect.assertions(1);
-
     const data = await getInitialData();
     expect(Object.keys(data)[0]).toEqual("users");
   });

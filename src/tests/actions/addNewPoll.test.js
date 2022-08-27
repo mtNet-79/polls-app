@@ -2,7 +2,7 @@ import {
   ADD_POLL,
   addPoll,
   handleAddPoll,
-} from "../createPoll";
+} from "../../actions/createPoll";
 
 import "jest-redux-thunk";
 import { savePoll } from "../../utils/api";
@@ -18,14 +18,20 @@ describe("addPoll", () => {
   });
 
 describe("handleAddPoll", () => {
-  it("should add new poll and return formatted object", async () => {
+  it("should add new poll via API to db and return a newly formatted object", async () => {
+    expect.assertions(3);
+    
     const poll = {
       optionOneText: "some text",
       optionTwoText: "option two text",
       author: "mthornton",
     };
+
     const savePollAPI = await savePoll(poll);
+    
     expect(savePollAPI.author).toEqual("mthornton");
+    expect(savePollAPI.optionOne).toEqual({votes: [], text: 'some text'});
+    expect(savePollAPI.optionTwo).toEqual({votes: [], text: 'option two text'});
   });
 
   it("tests error mesage", async () => {

@@ -1,7 +1,9 @@
 
 // import * as React from 'react';
-import loading from "../loading";
+import loading from "../../reducers/loading";
 import { RECEIVE_DATA } from "../../actions/shared";
+
+
 
 describe("loading reducer", () => {
   it("should return true as initial state", () => {
@@ -11,4 +13,7 @@ describe("loading reducer", () => {
   it("should hide when recieve data", () => {
     expect(loading(true, {type:RECEIVE_DATA})).toEqual(false);
   });
+  
+
+
 });

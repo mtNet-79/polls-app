@@ -1,4 +1,4 @@
-import questions from "./questions";
+import polls from "./polls";
 import users from "./users";
 import authedUser from "./authedUser";
 import loading from "./loading";
@@ -7,8 +7,8 @@ import { loadingBarReducer } from "react-redux-loading-bar";
 
 export default combineReducers({
   users,
-  questions,
+  polls,
   authedUser,
   loading,
-  loadingBar: loadingBarReducer,
+  loadingBar: loadingBarReducer, 
 });

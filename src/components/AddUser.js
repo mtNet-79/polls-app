@@ -30,9 +30,6 @@ const LogIn = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // alert('what');
-  
-   
       userName 
         ? dispatch(handleAddUser({fullName, image, password, userName})) 
         : dispatch(handleAddUser({fullName, image, password, users}))    
@@ -57,7 +54,7 @@ const LogIn = (props) => {
             value={fullName}
             onChange={checkForm}
           />
-          <label htmlFor="fullName" className="form-label center">
+          <label htmlFor="userName" className="form-label center">
             User name:
           </label>
           <input

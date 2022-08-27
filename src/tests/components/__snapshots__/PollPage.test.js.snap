@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders / take snapshot 1`] = `
+<div>
+  <div
+    style="direction: ltr;"
+  >
+    <div
+      class=""
+      style="width: 100%; transition: width 200ms linear 0s; will-change: width, opacity; height: 3px; background-color: red; position: absolute; opacity: 1;"
+    />
+    <div
+      style="display: table; clear: both;"
+    />
+  </div>
+  <div
+    class="container"
+  >
+    <div
+      class="nav"
+    >
+      <ul>
+        <li>
+          <a
+            class=""
+            href="/"
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            href="/leaderboard"
+          >
+            Leaderboard
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            href="/new"
+          >
+            Post
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <img
+            alt="icon"
+            class="avatar-small"
+            src="https://avatar-endpoint.herokuapp.com/api/"
+          />
+          <span>
+            mthornton
+          </span>
+        </li>
+        <li>
+          <a
+            href="/login"
+          >
+            Log out
+          </a>
+        </li>
+      </ul>
+    </div>
+    <h3>
+      Poll by 
+      mtsamis
+    </h3>
+    <img
+      alt="Avatar of mtsamis"
+      class="avatar center"
+    />
+    <div
+      class="flex-row poll"
+    >
+      <div
+        class="choice-container"
+      >
+        <div
+          class="center questionBox"
+        >
+          deploy to production once every two weeks
+        </div>
+        <button
+          class="btn-answer"
+          id="optionOne"
+        >
+          Click
+        </button>
+      </div>
+      <div
+        class="choice-container"
+      >
+        <div
+          class="center questionBox"
+        >
+          deploy to production once every month
+        </div>
+        <button
+          class="btn-answer"
+          id="optionOne"
+        >
+          Click
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

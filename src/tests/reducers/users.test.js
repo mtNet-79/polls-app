@@ -1,4 +1,4 @@
-import users from "../users";
+import users from "../../reducers/users";
 import { RECEIVE_DATA } from "../../actions/shared";
 import { ANSWER_POLL } from "../../actions/answerPoll";
 import { ADD_POLL } from "../../actions/createPoll";
@@ -11,7 +11,7 @@ const mock_users = {
     name: "Mike Thornton",
     avatarURL: "https://avatar-endpoint.herokuapp.com/api/",
     answers: {},
-    questions: [],
+    polls: [],
   },
   sarahedo: {
     id: "sarahedo",
@@ -24,7 +24,7 @@ const mock_users = {
       am8ehyc8byjqgar0jgpub9: "optionTwo",
       loxhs1bqm25b708cmbf3g: "optionTwo",
     },
-    questions: ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"],
+    polls: ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"],
   },
 };
 
@@ -76,12 +76,12 @@ describe("users reducer", () => {
   it("should take a new poll object and return new user state with added poll id to the user questions array", () => {
     expect.assertions(1);    
     const poll = formatPoll(mock_poll);
-    const userPollsPosted = mock_users["mthornton"].questions.length;
+    const userPollsPosted = mock_users["mthornton"].polls.length;
     expect(
       users(mock_users, {
         type: ADD_POLL,
         poll,
-      })["mthornton"].questions.length
+      })["mthornton"].polls.length
     ).toEqual(userPollsPosted + 1);
   });
 });

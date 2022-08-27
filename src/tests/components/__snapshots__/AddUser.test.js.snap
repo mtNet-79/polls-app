@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot 1`] = `
+<div>
+  <div
+    style="direction: ltr;"
+  >
+    <div
+      class=""
+      style="width: 100%; transition: width 200ms linear 0s; will-change: width, opacity; height: 3px; background-color: red; position: absolute; opacity: 1;"
+    />
+    <div
+      style="display: table; clear: both;"
+    />
+  </div>
+  <div
+    class="container"
+  >
+    <div
+      class="container"
+    >
+      <img
+        alt="description"
+        class="avatar"
+      />
+      <div>
+        <form
+          class="add-new"
+        >
+          <label
+            class="form-label center"
+            for="fullName"
+          >
+            Full name:
+          </label>
+          <input
+            id="fullName"
+            name="fullName"
+            placeholder="Full Name"
+            type="text"
+            value=""
+          />
+          <label
+            class="form-label center"
+            for="userName"
+          >
+            User name:
+          </label>
+          <input
+            id="userName"
+            name="userName"
+            placeholder="User Name"
+            type="text"
+            value=""
+          />
+          <label
+            class="form-label center"
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            id="password"
+            name="password"
+            placeholder="Password"
+            type="text"
+            value=""
+          />
+          <button
+            class="btn add-new-btn"
+            disabled=""
+            type="submit"
+          >
+            Add New User
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;

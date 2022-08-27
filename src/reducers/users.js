@@ -26,7 +26,7 @@ export default function users(state = {}, action) {
         ...state,
         [poll.author]: {
           ...state[poll.author],
-          questions: [...state[poll.author].questions, poll.id],
+          polls: [...state[poll.author].polls, poll.id],
         },
       };
     case RECEIVE_DATA:

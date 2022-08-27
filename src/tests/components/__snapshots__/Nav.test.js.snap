@@ -1,0 +1,216 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders / take snapshot 1`] = `
+<div>
+  <div
+    style="direction: ltr;"
+  >
+    <div
+      class=""
+      style="width: 100%; transition: width 200ms linear 0s; will-change: width, opacity; height: 3px; background-color: red; position: absolute; opacity: 1;"
+    />
+    <div
+      style="display: table; clear: both;"
+    />
+  </div>
+  <div
+    class="container"
+  >
+    <div
+      class="nav"
+    >
+      <ul>
+        <li>
+          <a
+            aria-current="page"
+            class="active"
+            href="/"
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            href="/leaderboard"
+          >
+            Leaderboard
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            href="/new"
+          >
+            Post
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <img
+            alt="icon"
+            class="avatar-small"
+            src="https://avatar-endpoint.herokuapp.com/api/"
+          />
+          <span>
+            mthornton
+          </span>
+        </li>
+        <li>
+          <a
+            href="/login"
+          >
+            Log out
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div
+      class="dashboard"
+    >
+      <div
+        class="poll-container"
+      >
+        <div
+          class="flex-row"
+        >
+          <div
+            class="cell"
+          >
+            <input
+              checked=""
+              class="react-switch-checkbox"
+              id="react-switch-new"
+              type="checkbox"
+            />
+            <label
+              class="react-switch-label"
+              for="react-switch-new"
+            >
+              <span
+                class="react-switch-button"
+              />
+            </label>
+          </div>
+          <div
+            class="cell"
+          >
+            <h2
+              class="polls-header center"
+            >
+              New Polls
+            </h2>
+          </div>
+        </div>
+        <ul
+          class="flex-row-wrap"
+        >
+          <li>
+            <div
+              class="poll-box"
+            >
+              <div>
+                mtsamis
+              </div>
+              <div>
+                1:16:PM | 4/30/2017
+              </div>
+              <button
+                class="btn"
+              >
+                Show Poll
+              </button>
+            </div>
+          </li>
+          <li>
+            <div
+              class="poll-box"
+            >
+              <div>
+                tylermcginnis
+              </div>
+              <div>
+                6:09:AM | 3/15/2017
+              </div>
+              <button
+                class="btn"
+              >
+                Show Poll
+              </button>
+            </div>
+          </li>
+          <li>
+            <div
+              class="poll-box"
+            >
+              <div>
+                sarahedo
+              </div>
+              <div>
+                3:22:PM | 3/3/2017
+              </div>
+              <button
+                class="btn"
+              >
+                Show Poll
+              </button>
+            </div>
+          </li>
+          <li>
+            <div
+              class="poll-box"
+            >
+              <div>
+                tylermcginnis
+              </div>
+              <div>
+                4:42:AM | 12/24/2016
+              </div>
+              <button
+                class="btn"
+              >
+                Show Poll
+              </button>
+            </div>
+          </li>
+          <li>
+            <div
+              class="poll-box"
+            >
+              <div>
+                mtsamis
+              </div>
+              <div>
+                1:02:AM | 7/14/2016
+              </div>
+              <button
+                class="btn"
+              >
+                Show Poll
+              </button>
+            </div>
+          </li>
+          <li>
+            <div
+              class="poll-box"
+            >
+              <div>
+                sarahedo
+              </div>
+              <div>
+                8:21:PM | 6/28/2016
+              </div>
+              <button
+                class="btn"
+              >
+                Show Poll
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -2,7 +2,7 @@ import {
   ANSWER_POLL,
   answerPoll,
   handleAnswerPoll,
-} from "../answerPoll";
+} from "../../actions/answerPoll";
 
 import "jest-redux-thunk";
 import { saveAnswerPoll } from "../../utils/api";
@@ -26,7 +26,6 @@ describe("answerPoll", () => {
 
 describe("handleAnswerPoll", () => {
   it("should add authedUser id to votes for answered poll", async () => {
-    expect.assertions(1);
     const answerObj = {
       authedUser: "mthornton",
       pid: "8xf0y6ziyjabvozdd253nd",
@@ -36,7 +35,6 @@ describe("handleAnswerPoll", () => {
     expect(saveAnswerAPI).toEqual(true);
   });
   it("test error when not passed all required data", async () => {
-    expect.assertions(1);
     const answerObj = {
       authedUser: "mthornton",
       pid: "8xf0y6ziyjabvozdd253nd",

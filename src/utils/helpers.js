@@ -12,7 +12,6 @@ export function formatDate(timestamp) {
 }
 
 export function formatPoll({ optionOneText, optionTwoText, author }) {
-  console.log(`option One : ${optionOneText}, option Two : ${optionTwoText}`)
   return {
     id: generateUID(),
     timestamp: Date.now(),
@@ -29,17 +28,11 @@ export function formatPoll({ optionOneText, optionTwoText, author }) {
 }
 
 export function formatUser({ fullName, image, password, userName, users }) {
-  let goodToGo = true;
+  let userIdIsAvailable = true;
   let userId = "";
-  // console.log(`match at user ${users['mthornton']?.id} and userID ${userName}`);
   if (userName) {
     userId = userName;
-    //user name user choose is already taken
-    Object.keys(users).forEach((user) => {
-      if (user === userId) {
-        goodToGo = false;
-      }
-    });
+    userIdIsAvailable = checkUserIdIsAvailable(users, userId);
   } else {
     //no user name provided, create one
     userId = fullName.trim().toLowerCase();
@@ -49,23 +42,34 @@ export function formatUser({ fullName, image, password, userName, users }) {
     userKeys.forEach((user) => {
       if (user === userId) userId = firstName.slice(0, 2) + lastName;
     });
-    //unable to create one due to matches with current database
-    Object.keys(users).forEach((user) => {
-      if (user === userId) {
-        goodToGo = false;
-      }
-    });
+    //check if generated name is available
+    userIdIsAvailable = checkUserIdIsAvailable(users, userId);
   }
+
   let returnValue = null;
-  if (goodToGo)
+
+  if (userIdIsAvailable)
     returnValue = {
       id: userId,
       password,
       name: fullName,
       avatarURL: image,
       answers: {},
-      questions: [],
+      polls: [],
     };
 
   return returnValue;
+}
+
+function checkUserIdIsAvailable(users, userId) {
+  let returnVal = true;
+  if(users) {
+    Object.keys(users).forEach((user) => {
+      if (user === userId) {
+        returnVal = false;
+      }
+    });
+  }  
+  
+  return returnVal;
 }

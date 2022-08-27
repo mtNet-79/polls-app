@@ -4,16 +4,16 @@ const Leaderboard = (props) => {
   const { users, userIds } = props;
 
   return (
-    <div className="leaderboard" role="table" aria-label="Leaderboard">
+    <div className="leaderboard" aria-label="Leaderboard">
       <div className="flex-table" role="table" aria-label="Leaderboard">
-        <div className="row header" role="rowgroup">
+        <div className="row header" role="rowheader">
           <div className="cell" >Users</div>
           <div className="cell" >Answered</div>
           <div className="cell" >Created</div>
         </div>
 
         {userIds.map((id) => (
-          <div className="row" role="rowgroup" key={id}>
+          <div className="row" role="row" key={id}>
             <div className="cell">
               <div className="flex-row">
                 {users[id].avatarURL 
@@ -39,7 +39,7 @@ const Leaderboard = (props) => {
               </div>
             </div>
             <div className="cell">{Object.keys(users[id].answers).length}</div>
-            <div className="cell">{users[id].questions.length}</div>
+            <div className="cell">{users[id].polls.length}</div>
           </div>
         ))}
       </div>
@@ -52,7 +52,7 @@ const mapStateToProps = ({ users }) => {
     userIds: Object.keys(users).filter(
       (key) =>
         Object.keys(users[key].answers).length !== 0 ||
-        users[key].questions.length !== 0
+        users[key].polls.length !== 0
     ),
     users,
   };

@@ -17,8 +17,9 @@ const withRouter = (Component) => {
 };
 
 const PollPage = (props) => {
+  
   const navigate = useNavigate();
-  const { dispatch, authedUser, pid, questions, users } = props;
+  const { dispatch, authedUser, pid, polls, users } = props;
 
   const handleChoice = (e) => {
     if (e.target.id === OPTION_ONE)
@@ -29,16 +30,16 @@ const PollPage = (props) => {
   };
   return (
     <Fragment>
-      <h3>Poll by {questions[pid].author}</h3>
+      <h3>Poll by {polls[pid].author}</h3>
       <img
-        src={users[questions[pid].author].avatarURL}
-        alt={`Avatar of ${questions[pid].author}`}
+        src={users[polls[pid].author].avatarURL}
+        alt={`Avatar of ${polls[pid].author}`}
         className="avatar center"
       />
       <div className="flex-row poll">
         <div className="choice-container">
           <div className="center questionBox">
-            {questions[pid].optionOne.text}
+            {polls[pid].optionOne.text}
           </div>
           <button className="btn-answer" id="optionOne" onClick={handleChoice}>
             Click
@@ -46,7 +47,7 @@ const PollPage = (props) => {
         </div>
         <div className="choice-container">
           <div className="center questionBox">
-            {questions[pid].optionTwo.text}
+            {polls[pid].optionTwo.text}
           </div>
           <button className="btn-answer" id="optionOne" onClick={handleChoice}>
             Click
@@ -57,14 +58,14 @@ const PollPage = (props) => {
   );
 };
 
-const mapStateToProps = ({ authedUser, questions, users }, props) => {
+const mapStateToProps = ({ authedUser, polls, users }, props) => {
   const { pid } = props.router.params;
   const { image } = props;
 
   return {
     authedUser,
     pid,
-    questions,
+    polls,
     users,
     image,
   };

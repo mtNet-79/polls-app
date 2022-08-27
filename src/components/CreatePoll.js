@@ -16,7 +16,7 @@ const CreatePoll = (props) => {
   const checkForm = (e) => {
     if (e.target.id === "optionOne") setOptionOne(e.target.value);
     else if (e.target.id === "optionTwo") setOptionTwo(e.target.value);
-    if (optionOne !== "" && optionTwo !== "") setFormReady(true);
+    if ((optionOne !== "" && optionOne.length > 5 ) && (optionTwo !== "" && optionTwo.length > 5)) setFormReady(true);
   };
 
   const handleSubmit = (e) => {

@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+import { NavLink, Link  } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
 
 
 
 const Nav = (props) => {
-  console.log("nav props: ", props);
+  // console.log("nav props: ", props);
   const { dispatch, users, authedUser } = props;
   const user  = users[authedUser];
 
@@ -14,16 +14,16 @@ const Nav = (props) => {
   }
 
   return (
-    <div className="nav">
+    <div className="nav" >
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <NavLink  to="/">Home</NavLink >
         </li>
         <li>
-          <Link to="/leaderboard">Ledaerboard</Link>
+          <NavLink  to="/leaderboard">Leaderboard</NavLink >
         </li>
         <li>
-          <Link to="/new">Post</Link>
+          <NavLink  to="/new">Post</NavLink >
         </li>
       </ul>
       <ul>
@@ -32,7 +32,7 @@ const Nav = (props) => {
           <span>{user.id}</span>
         </li>
         <li>
-          <Link to="/login" onClick={hanldeLogOutOnClick}>Logout</Link>
+          <Link  to="/login" onClick={hanldeLogOutOnClick}>Log out</Link >
         </li>
       </ul>
     </div>

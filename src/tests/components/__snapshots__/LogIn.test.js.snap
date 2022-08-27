@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`all elements are rendered/ snapshot 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <img
+      alt="description"
+      class="avatar"
+    />
+    <div
+      class="add-new"
+    >
+      <form
+        class="add-new"
+      >
+        <label
+          class="form-label center"
+          for="userName"
+        >
+          User
+        </label>
+        <input
+          id="userName"
+          name="userName"
+          placeholder="User Name"
+          type="text"
+        />
+        <label
+          class="form-label center"
+          for="password"
+        >
+          Password
+        </label>
+        <input
+          id="password"
+          name="password"
+          placeholder="Password"
+          type="text"
+        />
+        <button
+          class="btn log-in-button"
+          disabled=""
+          type="submit"
+        >
+          Log In
+        </button>
+      </form>
+      <a
+        class="btn add-new-btn"
+        href="/add-user"
+        value="Add New User"
+      >
+        Add New User
+      </a>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render to snapshot 1`] = `
+<div>
+  <div
+    style="direction: ltr;"
+  >
+    <div
+      class=""
+      style="width: 100%; transition: width 200ms linear 0s; will-change: width, opacity; height: 3px; background-color: red; position: absolute; opacity: 1;"
+    />
+    <div
+      style="display: table; clear: both;"
+    />
+  </div>
+  <div
+    class="container"
+  >
+    <div
+      class="nav"
+    >
+      <ul>
+        <li>
+          <a
+            class=""
+            href="/"
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            href="/leaderboard"
+          >
+            Leaderboard
+          </a>
+        </li>
+        <li>
+          <a
+            aria-current="page"
+            class="active"
+            href="/new"
+          >
+            Post
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <img
+            alt="icon"
+            class="avatar-small"
+            src="https://avatar-endpoint.herokuapp.com/api/"
+          />
+          <span>
+            mthornton
+          </span>
+        </li>
+        <li>
+          <a
+            href="/login"
+          >
+            Log out
+          </a>
+        </li>
+      </ul>
+    </div>
+    <h1>
+      Would you rather
+    </h1>
+    <h3
+      class="light"
+    >
+      Create a Poll
+    </h3>
+    <form
+      class="add-new"
+    >
+      <label
+        class="form-label center"
+        for="optionOne"
+      >
+        First Option
+      </label>
+      <input
+        id="optionOne"
+        name="optionOne"
+        placeholder="Option One"
+        type="text"
+        value=""
+      />
+      <label
+        class="form-label center"
+        for="optionTwo"
+      >
+        Second Option
+      </label>
+      <input
+        id="optionTwo"
+        name="optionTwo"
+        placeholder="Option Two"
+        type="text"
+        value=""
+      />
+      <button
+        class="btn"
+        disabled=""
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+`;

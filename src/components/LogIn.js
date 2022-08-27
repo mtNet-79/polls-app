@@ -1,43 +1,53 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 // import { handleAddUser } from "../actions/users";
 import { setAuthedUser } from "../actions/authedUser";
+import { Link } from "react-router-dom";
 // WHEN PAGE OPENS RENDER NEW USER OBJ WITH NEW RANDOM IMAGE
 // IF USER SUBMITS NAME AND PASSWORD ADD TO THE OBJECT THEN SUBMIT THE OBJECT TO DISPATCH
 const LogIn = (props) => {
-  const [user, setUser] = useState("");
-  const [password, setPassword] = useState("");
+  // const [user, setUser] = useState("");
+  // const [password, setPassword] = useState("");
   const [formReady, setFormReady] = useState(false);
   const navigate = useNavigate();
   const { dispatch, image, users } = props;
+  const userRef = useRef("");
+  const passwordRef = useRef("");
 
-  const checkForm = (e) => {
-    if (e.target.id === "userName") setUser(e.target.value);
-    else if (e.target.id === "password") setPassword(e.target.value);
-    if (user !== "" && password !== "" && password.length > 5)
+  const checkForm = () => {
+    
+    if (
+      userRef.current.value !== "" &&
+      passwordRef.current.value !== "" &&
+      passwordRef.current.value.length > 5
+    )
       setFormReady(true);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (users[user]) {
-      if (users[user].password === password) {
-        dispatch(setAuthedUser(user));
+    if (users[userRef.current.value]) {
+      if (users[userRef.current.value].password === passwordRef.current.value) {
+        // setUser(userRef.current.value);
+        // setPassword(passwordRef.current.value);
+        dispatch(setAuthedUser(userRef.current.value));
         navigate("/");
       } else {
         alert("Wrong password. Try again.");
       }
     } else {
-      alert("This account does not exist. Add New User.")
+      alert("This account does not exist. Add New User.");
     }
 
-    setUser("");
-    setPassword("");
+    // setUser("");
+    // setPassword("");
   };
-  const toAddUserForm = () => {
-    navigate("/add-user");
-  };
+  // const toAddUserForm = () => {
+  //   setFormReady(true)
+
+  //   navigate("/add-user");
+  // };
   //TODO: create random image
 
   return (
@@ -53,7 +63,8 @@ const LogIn = (props) => {
             type="text"
             name="userName"
             id="userName"
-            value={user}
+            // value={user}
+            ref={userRef}
             onChange={checkForm}
           />
           <label htmlFor="password" className="form-label center">
@@ -64,7 +75,8 @@ const LogIn = (props) => {
             type="text"
             name="password"
             id="password"
-            value={password}
+            // value={password}
+            ref={passwordRef}
             onChange={checkForm}
           />
           <button
@@ -76,12 +88,14 @@ const LogIn = (props) => {
           </button>
         </form>
 
-        <input
-          type="button"
+        <Link
+          to="/add-user"
           className="btn add-new-btn"
           value="Add New User"
-          onClick={toAddUserForm}
-        />
+          // onClick={toAddUserForm}
+        >
+          Add New User
+        </Link>
       </div>
     </div>
   );

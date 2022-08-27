@@ -1,5 +1,5 @@
 import { SET_AUTHED_USER } from "../../actions/authedUser";
-import authedUser from "../authedUser";
+import authedUser from "../../reducers/authedUser";
 
 describe("authedUser", () => {
   it("should return null as the initial default state", () => {

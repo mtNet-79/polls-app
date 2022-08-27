@@ -7,7 +7,7 @@ let users = {
     name: "Mike Thornton",
     avatarURL: "https://avatar-endpoint.herokuapp.com/api/",
     answers: {},
-    questions: [],
+    polls: [],
   },
   sarahedo: {
     id: "sarahedo",
@@ -20,7 +20,7 @@ let users = {
       am8ehyc8byjqgar0jgpub9: "optionTwo",
       loxhs1bqm25b708cmbf3g: "optionTwo",
     },
-    questions: ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"],
+    polls: ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"],
   },
   tylermcginnis: {
     id: "tylermcginnis",
@@ -31,7 +31,7 @@ let users = {
       vthrdm985a262al8qx3do: "optionOne",
       xj352vofupe1dqz9emx13r: "optionTwo",
     },
-    questions: ["loxhs1bqm25b708cmbf3g", "vthrdm985a262al8qx3do"],
+    polls: ["loxhs1bqm25b708cmbf3g", "vthrdm985a262al8qx3do"],
   },
   mtsamis: {
     id: "mtsamis",
@@ -43,7 +43,7 @@ let users = {
       vthrdm985a262al8qx3do: "optionTwo",
       "6ni6ok3ym7mf1p33lnez": "optionOne",
     },
-    questions: ["6ni6ok3ym7mf1p33lnez", "xj352vofupe1dqz9emx13r"],
+    polls: ["6ni6ok3ym7mf1p33lnez", "xj352vofupe1dqz9emx13r"],
   },
   zoshikanlu: {
     id: "zoshikanlu",
@@ -53,7 +53,7 @@ let users = {
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
     },
-    questions: [],
+    polls: [],
   },
 };
 
@@ -166,7 +166,7 @@ export function _savePoll(poll) {
         ...users,
         [poll.author]: {
           ...users[poll.author],
-          questions: [...users[poll.author].questions, formattedPoll.id],
+          polls: [...users[poll.author].polls, formattedPoll.id],
         },
       };
 
@@ -176,7 +176,7 @@ export function _savePoll(poll) {
 }
 
 export function _saveUser(info) {  
-  return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
     const formattedUser = formatUser(info);
     if(formattedUser){
       setTimeout(() => {
@@ -194,7 +194,7 @@ export function _saveUser(info) {
     }
   });
 }
-let count = 0;
+
 export function _savePollAnswer({ authedUser, pid, answer }) {  
   return new Promise((resolve, reject) => {
     if (!authedUser || !pid || !answer) {

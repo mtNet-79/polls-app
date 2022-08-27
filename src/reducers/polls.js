@@ -4,7 +4,7 @@ import { ADD_POLL } from "../actions/createPoll";
 
 const initialState = {};
 
-export default function questions(pollQuestions = initialState, action) {
+export default function polls(pollQuestions = initialState, action) {
   switch (action.type) {
     case ADD_POLL:
       const { poll } = action;

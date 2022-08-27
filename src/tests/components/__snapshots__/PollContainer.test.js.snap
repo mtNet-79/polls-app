@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with defualt unaswered polls / snapshot 1`] = `
+<div>
+  <ul
+    class="flex-row-wrap"
+  >
+    <li>
+      <div>
+        Poll Box
+      </div>
+    </li>
+    <li>
+      <div>
+        Poll Box
+      </div>
+    </li>
+    <li>
+      <div>
+        Poll Box
+      </div>
+    </li>
+    <li>
+      <div>
+        Poll Box
+      </div>
+    </li>
+    <li>
+      <div>
+        Poll Box
+      </div>
+    </li>
+    <li>
+      <div>
+        Poll Box
+      </div>
+    </li>
+  </ul>
+</div>
+`;

@@ -1,10 +1,28 @@
-# Getting Started with Create React App and Redux
+# Polls App
+
+This allows a user to answer polls created by other users, create new polls to be answered.
+
+## Instructions
+
+To use the app the user must b e logged in. If yoour user id is not already in the mock api database, you may add a new user account.
+
+Once a user is logged in they may view polls to be answered and polls they have already answered, with the help of a toggle switch to alternate between the two views.
+
+The user may then select a poll to answer.
+
+The user may use the naviagation bar to post new polls, view a leaderboard that scores participation, or log out.
+
+# Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install `
+
+Downloads packages code base described in the package.json file
 
 ### `npm start`
 

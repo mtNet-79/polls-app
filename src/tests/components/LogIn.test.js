@@ -3,8 +3,8 @@ import {
   screen,
   waitFor,
 } from "@testing-library/react";
-import LogIn from "../../components/LogIn";
-import App from "../../components/App";
+import LogIn from "../../Components/LogIn";
+import App from "../../Components/App";
 import { renderWithProviders } from "./test-utils";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";

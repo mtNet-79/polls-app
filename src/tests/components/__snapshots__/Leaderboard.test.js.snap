@@ -40,7 +40,7 @@ exports[`should render leader table with all participant rankings/ with snapshot
         <li>
           <a
             class=""
-            href="/new"
+            href="/add"
           >
             Post
           </a>
@@ -59,7 +59,7 @@ exports[`should render leader table with all participant rankings/ with snapshot
         </li>
         <li>
           <a
-            href="/login"
+            href="/"
           >
             Log out
           </a>
@@ -147,48 +147,6 @@ exports[`should render leader table with all participant rankings/ with snapshot
             <div
               class="flex-row"
             >
-              <img
-                alt="Avatar of Tyler McGinnis"
-                class="avatar-small lboard-img"
-                src="https://tylermcginnis.com/would-you-rather/tyler.jpg"
-              />
-              <div
-                class="column"
-              >
-                <div
-                  class="name"
-                >
-                  Tyler McGinnis
-                </div>
-                <div
-                  class="user-name"
-                >
-                  tylermcginnis
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="cell"
-          >
-            2
-          </div>
-          <div
-            class="cell"
-          >
-            2
-          </div>
-        </div>
-        <div
-          class="row"
-          role="row"
-        >
-          <div
-            class="cell"
-          >
-            <div
-              class="flex-row"
-            >
               <svg
                 class="avatar-small"
                 viewBox="0 0 512 512"
@@ -218,6 +176,48 @@ exports[`should render leader table with all participant rankings/ with snapshot
             class="cell"
           >
             3
+          </div>
+          <div
+            class="cell"
+          >
+            2
+          </div>
+        </div>
+        <div
+          class="row"
+          role="row"
+        >
+          <div
+            class="cell"
+          >
+            <div
+              class="flex-row"
+            >
+              <img
+                alt="Avatar of Tyler McGinnis"
+                class="avatar-small lboard-img"
+                src="https://tylermcginnis.com/would-you-rather/tyler.jpg"
+              />
+              <div
+                class="column"
+              >
+                <div
+                  class="name"
+                >
+                  Tyler McGinnis
+                </div>
+                <div
+                  class="user-name"
+                >
+                  tylermcginnis
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="cell"
+          >
+            2
           </div>
           <div
             class="cell"

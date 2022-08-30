@@ -1,22 +1,31 @@
-import { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
-// import { handleAddUser } from "../actions/users";
 import { setAuthedUser } from "../actions/authedUser";
 import { Link } from "react-router-dom";
-// WHEN PAGE OPENS RENDER NEW USER OBJ WITH NEW RANDOM IMAGE
-// IF USER SUBMITS NAME AND PASSWORD ADD TO THE OBJECT THEN SUBMIT THE OBJECT TO DISPATCH
+import { autoComplete } from "../utils/helpers";
+
 const LogIn = (props) => {
-  // const [user, setUser] = useState("");
-  // const [password, setPassword] = useState("");
   const [formReady, setFormReady] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { state } = location;
+  const redirectedFrom = state?.from;
   const { dispatch, image, users } = props;
   const userRef = useRef("");
   const passwordRef = useRef("");
 
-  const checkForm = () => {
-    
+  useEffect(() => {
+    if(props.authedUser) {
+      const { from } = location.state || { from: { pathname: "/" } };
+      console.log("from: ", from);
+      navigate(from, { replace: true });
+    }
+  });
+  
+  const checkForm = (e) => {
+    if (e.target.id === "userName") autoComplete(e.target, users);
+
     if (
       userRef.current.value !== "" &&
       passwordRef.current.value !== "" &&
@@ -25,30 +34,23 @@ const LogIn = (props) => {
       setFormReady(true);
   };
 
+  const showUsers = (e) => {
+    autoComplete(e.target, users);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (users[userRef.current.value]) {
       if (users[userRef.current.value].password === passwordRef.current.value) {
-        // setUser(userRef.current.value);
-        // setPassword(passwordRef.current.value);
         dispatch(setAuthedUser(userRef.current.value));
-        navigate("/");
+        redirectedFrom ? navigate(redirectedFrom, { replace: true }) : navigate("/", { replace: true});
       } else {
         alert("Wrong password. Try again.");
       }
     } else {
       alert("This account does not exist. Add New User.");
     }
-
-    // setUser("");
-    // setPassword("");
   };
-  // const toAddUserForm = () => {
-  //   setFormReady(true)
-
-  //   navigate("/add-user");
-  // };
-  //TODO: create random image
 
   return (
     <div className="container">
@@ -58,15 +60,19 @@ const LogIn = (props) => {
           <label htmlFor="userName" className="form-label center">
             User
           </label>
-          <input
-            placeholder="User Name"
-            type="text"
-            name="userName"
-            id="userName"
-            // value={user}
-            ref={userRef}
-            onChange={checkForm}
-          />
+          <div className="autocomplete" style={{ width: "300px" }}>
+            <input
+              placeholder="User Name"
+              type="text"
+              name="userName"
+              id="userName"
+              ref={userRef}
+              onChange={checkForm}
+              onClick={showUsers}
+              autoComplete="off"
+            />
+          </div>
+
           <label htmlFor="password" className="form-label center">
             Password
           </label>
@@ -75,7 +81,6 @@ const LogIn = (props) => {
             type="text"
             name="password"
             id="password"
-            // value={password}
             ref={passwordRef}
             onChange={checkForm}
           />
@@ -88,12 +93,7 @@ const LogIn = (props) => {
           </button>
         </form>
 
-        <Link
-          to="/add-user"
-          className="btn add-new-btn"
-          value="Add New User"
-          // onClick={toAddUserForm}
-        >
+        <Link to="/add-user" className="btn add-new-btn" value="Add New User">
           Add New User
         </Link>
       </div>

@@ -1,7 +1,7 @@
 import { screen, waitFor, within } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import App from "../../components/App";
+import App from "../../Components/App";
 import { renderWithProviders } from "./test-utils";
 
 test('render to snapshot', async () => {

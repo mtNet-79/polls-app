@@ -1,7 +1,4 @@
-
-
-
-import React from 'react';
+import React from "react";
 
 const Switch = ({ isOn, handleToggle }) => {
   return (

@@ -22,7 +22,8 @@ exports[`all elements are rendered 1`] = `
       <ul>
         <li>
           <a
-            class=""
+            aria-current="page"
+            class="active"
             href="/"
           >
             Home
@@ -39,7 +40,7 @@ exports[`all elements are rendered 1`] = `
         <li>
           <a
             class=""
-            href="/new"
+            href="/add"
           >
             Post
           </a>
@@ -58,7 +59,7 @@ exports[`all elements are rendered 1`] = `
         </li>
         <li>
           <a
-            href="/login"
+            href="/"
           >
             Log out
           </a>

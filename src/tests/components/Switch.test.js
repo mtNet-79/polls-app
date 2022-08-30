@@ -1,9 +1,9 @@
 import { render, screen, waitFor, within } from "@testing-library/react";
-import Switch from "../../components/Switch";
+import Switch from "../../Components/Switch";
 import "@testing-library/jest-dom";
 import { renderWithProviders } from "./test-utils";
 
-import App from "../../components/App";
+import App from "../../Components/App";
 import userEvent from "@testing-library/user-event";
 
 test("has a checkbox for toggle / get snapshot", () => {

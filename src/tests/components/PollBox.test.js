@@ -1,13 +1,13 @@
 import { screen, waitFor, within } from "@testing-library/react";
-// import PollContainer from "../../components/PollContainer";
+// import PollContainer from "../../Components/PollContainer";
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
-import App from "../../components/App";
+import App from "../../Components/App";
 import { renderWithProviders } from "./test-utils";
 
 //unit tests
 test("all elements are rendered showing unaswered polls / take snapshot", async () => {
-  const {store, container} =renderWithProviders(<App />, {route: '/dashboard', authedUser: 'mthornton'});
+  const {store, container} =renderWithProviders(<App />, {route: '/', authedUser: 'mthornton'});
 
   await waitFor(
     () => expect(screen.getByText(/new polls/i)).toBeInTheDocument(),

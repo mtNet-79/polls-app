@@ -11,12 +11,12 @@ import LoadingBar from "react-redux-loading-bar";
 import { Routes, Route } from "react-router-dom";
 import CreatePoll from "./CreatePoll";
 import { useLocation } from "react-router-dom";
+import NotFound from "./NotFound";
+import RequireAuth from "./RequireAuth";
 
 const withRouter = (Component) => {
   const ComponentWithRouterProp = (props) => {
     let location = useLocation();
-    // let navigate = useNavigate();
-    // let params = useParams();
     return <Component {...props} router={{ location }} />;
   };
 
@@ -28,6 +28,7 @@ const App = (props) => {
   const [image, setImage] = useState("");
   const { dispatch, authedUser, loading } = props;
   useEffect(() => {
+    // document.body.style.backgroundImage =  "none";
     const generateRandomAvatar = () => {
       fetch("https://avatar-endpoint.herokuapp.com/api/").then((res) => {
         res.blob().then((blobRes) => {
@@ -47,39 +48,58 @@ const App = (props) => {
     authedUser === null ? generateRandomAvatar() : alreadyLoggedIn();
   }, [dispatch, authedUser]);
 
+
+
   return (
     <Fragment>
       <LoadingBar />
-      
+
       {loading ? null : (
-        <div className="container">
-          {authedUser ? (
+        <div className="container">          
             <Fragment>
-              <Nav />
+              {(props.location.pathname === "/" || authedUser) && <Nav />}
               <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route exact path="/new" element={<CreatePoll />} />
-                <Route exact path="/leaderboard" element={<Leaderboard />} />
                 <Route
-                  exact path="/polls/:pid"
-                  element={<PollPage image={image} />}
+                  exact
+                  path="/add-user"
+                  element={<AddUser image={image} />}
                 />
-                
-                <Route path="*" element={<Dashboard />} />
+                <Route path="/login" element={<LogIn image={image} />} />
+                <Route exact path="/" element={<Dashboard />} />
+                <Route exact path="/add" element=
+                  {<RequireAuth redirectTo="/login" navPath={props.location.pathname}>
+                    <CreatePoll />
+                  </RequireAuth>} />
+                <Route
+                  exact
+                  path="/leaderboard"
+                  element={
+                    <RequireAuth redirectTo="/login" navPath={props.location.pathname}>
+                      <Leaderboard />
+                    </RequireAuth>
+                  }
+                />
+                 <Route
+                  exact
+                  path="/answered/questions/:pid"
+                  element={
+                    <RequireAuth redirectTo="/login" navPath={props.location.pathname}>
+                      <PollPage image={image} answered={true} />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  exact
+                  path="/questions/:pid"
+                  element={
+                    <RequireAuth redirectTo="/login" navPath={props.location.pathname}>
+                      <PollPage image={image} answered={false} />
+                    </RequireAuth>
+                  }
+                />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </Fragment>
-          ) : (
-            <Routes>
-              <Route path="/login" element={<LogIn image={image} />} />
-              <Route
-                path="/add-user"
-                exact
-                element={<AddUser image={image} />}
-              />
-              <Route path="*" element={<LogIn image={image} />} />
-              
-            </Routes>
-          )}
         </div>
       )}
     </Fragment>
@@ -87,35 +107,6 @@ const App = (props) => {
 };
 
 
-
-// return (
-//   <Fragment>
-//     <LoadingBar />
-//     {props.loading ? null : (
-//       <div className="container">
-//         {props.location.pathname === "/add-user" ? (
-//           <AddUser image={image} />
-//         ) : props.authedUser ? (
-//           <Fragment>
-//             <Nav />
-//             <Routes>
-//               <Route path="/" exact element={<Dashboard />} />
-//               <Route exact path="/login" element={<LogIn image={image} />} />
-//               <Route exact path="/new" element={<CreatePoll />} />
-//               <Route exact path="/leaderboard" element={<Leaderboard />} />
-//               <Route
-//                 path="/questions/:pid"
-//                 element={<PollPage image={image} />}
-//               />
-//             </Routes>
-//           </Fragment>
-//         ) : (
-//           <LogIn image={image} />
-//         )}
-//       </div>
-//     )}
-//   </Fragment>
-// );
 
 const mapStateToProps = ({ authedUser, loading, users }, props) => {
   // const keys = Object.keys(users);

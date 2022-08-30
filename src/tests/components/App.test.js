@@ -7,7 +7,7 @@ import {
 import React from "react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import App from "../../components/App";
+import App from "../../Components/App";
 import { renderWithProviders } from "./test-utils";
 // import renderer from 'react-test-renderer';
 // import '../mockJsdom'
@@ -19,7 +19,7 @@ test("after app component loads initial data user is directed to log in page", a
   await waitFor(
     () =>
       expect(
-        screen.getByRole("button", { name: /log in/i })
+        screen.getByRole("link", { name: /sign in/i })
       ).toBeInTheDocument(),
     {
       timeout: 2000,
@@ -67,6 +67,8 @@ test("if user signed in, directed to dashboard, check nav routes", async () => {
   expect(answerButtons.length).toBe(2);
 
   await user.click(screen.getByRole("link", { name: /log out/i }));
+  expect(screen.getByText(/new polls/i)).toBeInTheDocument()
+  await user.click(screen.getByRole("link", { name: /sign in/i }))
   const inputsLogInPage = screen.getAllByRole("textbox");
   expect(inputsLogInPage.length).toBe(2);
   expect(screen.getByRole("button", { name: /log in/i })).toBeInTheDocument();
@@ -88,6 +90,7 @@ test("if user signs outs", async () => {
   expect(screen.getByText(/home/i)).toBeInTheDocument();
 
   await user.click(screen.getByRole("link", { name: /log out/i }));
+  await user.click(screen.getByRole("link", { name: /sign in/i }))
   const inputsLogInPage = screen.getAllByRole("textbox");
   expect(inputsLogInPage.length).toBe(2);
   expect(screen.getByRole("button", { name: /log in/i })).toBeInTheDocument();
@@ -108,12 +111,18 @@ test("log in, answer poll, view leaderboard, view answered polls, create poll, s
   await waitFor(
     () =>
       expect(
-        screen.getByRole("button", { name: /log in/i })
+        screen.getByRole("link", { name: /sign in/i })
       ).toBeInTheDocument(),
     {
       timeout: 2500,
     }
   );
+
+
+  const header = screen.getByRole("heading", { name: /new polls/i });
+  expect(header).toBeInTheDocument();
+
+  await user.click(screen.getByRole("link", { name: /sign in/i }));
 
   await user.type(screen.getByLabelText(/user/i), "mthornton");
   const userInput = screen.getByRole("textbox", { name: /user/i });
@@ -176,6 +185,13 @@ test("log in, answer poll, view leaderboard, view answered polls, create poll, s
 
   //TODO:: answer poll
   await user.click(buttons[0])
+
+
+  const newButtons = screen.queryAllByRole('button', { name: /click/i })
+  expect(newButtons.length).toBe(0);
+
+
+  await user.click(screen.getByRole('link', {name: /leaderboard/i}))
  //back at leaderboard
  const table = screen.getByRole("table", {
   name: /leaderboard/i,
@@ -252,7 +268,7 @@ await user.click(screen.getByRole("link", { name: /home/i }))
   //TODO: sign out
   await user.click(screen.getByRole('link', {name: /log out/i}))
   expect(
-    screen.getByRole("button", { name: /log in/i })
+    await screen.findByRole("link", { name: /sign in/i })
   ).toBeInTheDocument()
   //reloads initial data ? 
 

@@ -1,6 +1,6 @@
 import { screen, waitFor, within } from "@testing-library/react";
 
-import App from "../../components/App";
+import App from "../../Components/App";
 
 import { renderWithProviders } from "./test-utils";
 import "@testing-library/jest-dom";
@@ -9,7 +9,7 @@ import "@testing-library/jest-dom/extend-expect";
 //unit tests
 test("all elements are rendered", async () => {
   const { store, container } = renderWithProviders(<App />, {
-    route: "/dashboard",
+    route: "/",
     authedUser: "mthornton",
   });
 
@@ -63,9 +63,9 @@ test("all elements are rendered", async () => {
 //integration tests
 
 test("should redirect user to log in page if not signed in", async () => {
-  renderWithProviders(<App />, { route: "/dashboard" });
+  renderWithProviders(<App />, { route: "/" });
 
-  await waitFor(() => expect(screen.getByText(/log in/i)).toBeInTheDocument(), {
+  await waitFor(() => expect(screen.getByText(/sign in/i)).toBeInTheDocument(), {
     timeout: 2000,
   });
 });

@@ -1,10 +1,9 @@
-import App from "../../components/App";
+import App from "../../Components/App";
 import { renderWithProviders } from "./test-utils";
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
 import '@testing-library/jest-dom';
-import renderer from 'react-test-renderer';
-import AddUser from "../../components/AddUser";
+
 
 test('paints form and has submit feature', async () => {
     const user = userEvent.setup();
@@ -12,13 +11,15 @@ test('paints form and has submit feature', async () => {
     await waitFor(
         () =>
           expect(
-            screen.getByRole("link", { name: /add new user/i })
+            screen.getByRole("link", { name: /sign in/i })
           ).toBeInTheDocument(),
         {
           timeout: 2500,
         }
       );
 
+
+      await user.click(screen.getByRole("link", { name: /sign in/i }))
       //add user link is present
   const addNewUserBtn = screen.getByRole("link", { name: /add new user/i });
   expect(addNewUserBtn).toBeInTheDocument();
@@ -67,17 +68,20 @@ test('snapshot', async () => {
 
     const user = userEvent.setup();
     const {container} = renderWithProviders(<App />)
+
     // const tree = renderer.create(<AddUser />).toJSON();
     await waitFor(
         () =>
           expect(
-            screen.getByRole("link", { name: /add new user/i })
+            screen.getByRole("link", { name: /sign in/i })
           ).toBeInTheDocument(),
         {
           timeout: 2500,
         }
       );
 
+
+    await user.click(screen.getByRole("link", { name: /sign in/i }));
       //add user link is present
   const addNewUserBtn = screen.getByRole("link", { name: /add new user/i });
   expect(addNewUserBtn).toBeInTheDocument();

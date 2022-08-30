@@ -9,9 +9,10 @@ const LogIn = (props) => {
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [formReady, setFormReady] = useState(false);
+
   const navigate = useNavigate();
-  const { dispatch, image, users } = props;
-  
+
+  const { dispatch, image, users } = props;  
 
   const checkForm = (e) => {
     if (e.target.id === "fullName") setFullName(e.target.value);
@@ -35,8 +36,6 @@ const LogIn = (props) => {
         : dispatch(handleAddUser({fullName, image, password, users}))    
     navigate("/");
   };
-
-  //TODO: create random image
 
   return (
     <div className="container">

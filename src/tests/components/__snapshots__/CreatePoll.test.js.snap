@@ -40,7 +40,7 @@ exports[`render to snapshot 1`] = `
           <a
             aria-current="page"
             class="active"
-            href="/new"
+            href="/add"
           >
             Post
           </a>
@@ -59,7 +59,7 @@ exports[`render to snapshot 1`] = `
         </li>
         <li>
           <a
-            href="/login"
+            href="/"
           >
             Log out
           </a>

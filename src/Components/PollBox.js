@@ -3,11 +3,12 @@ import { formatDate } from "../utils/helpers";
 import { useNavigate } from "react-router-dom";
 
 const PollBox = (props) => {
- 
   const navigate = useNavigate();
-  const { poll } = props;
+  const { poll, answered } = props;
   const showPoll = () => {
-    navigate(`/polls/${poll.id}`);
+    answered
+      ? navigate(`answered/questions/${poll.id}`)
+      : navigate(`/questions/${poll.id}`);
   };
   return (
     <div className="poll-box">
@@ -20,11 +21,13 @@ const PollBox = (props) => {
   );
 };
 
-const mapStateToProps = ({ polls }, { id }) => {
+const mapStateToProps = ({ polls }, { id, answered }) => {
   const poll = polls[id];
- 
+
   return {
     poll,
+    answered,
+    
   };
 };
 

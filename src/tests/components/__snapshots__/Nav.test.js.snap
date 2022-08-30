@@ -40,7 +40,7 @@ exports[`renders / take snapshot 1`] = `
         <li>
           <a
             class=""
-            href="/new"
+            href="/add"
           >
             Post
           </a>
@@ -59,7 +59,7 @@ exports[`renders / take snapshot 1`] = `
         </li>
         <li>
           <a
-            href="/login"
+            href="/"
           >
             Log out
           </a>

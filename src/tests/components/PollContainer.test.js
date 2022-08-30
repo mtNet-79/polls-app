@@ -1,5 +1,5 @@
 import { screen, render } from "@testing-library/react";
-import PollContainer from "../../components/PollContainer";
+import PollContainer from "../../Components/PollContainer";
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 
@@ -12,7 +12,7 @@ const pollsMock = [
   "8xf0y6ziyjabvozdd253nd",
 ];
 
-jest.mock("../../components/PollBox", () => () => {
+jest.mock("../../Components/PollBox", () => () => {
   return <div>Poll Box</div>;
 });
 

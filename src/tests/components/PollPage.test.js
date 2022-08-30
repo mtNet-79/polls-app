@@ -2,7 +2,7 @@ import { screen, waitFor, within } from "@testing-library/react";
 // import PollContainer from "../../components/PollContainer";
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
-import App from "../../components/App";
+import App from "../../Components/App";
 import { renderWithProviders } from "./test-utils";
 import userEvent from "@testing-library/user-event";
 
@@ -12,7 +12,7 @@ import userEvent from "@testing-library/user-event";
 test("renders / take snapshot", async () => {
   const user = userEvent.setup();
   const {container} =  renderWithProviders(<App />, {
-    route: "/dashboard",
+    route: "/",
     authedUser: "mthornton",
   });
 

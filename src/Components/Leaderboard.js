@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 
 const Leaderboard = (props) => {
   const { users, userIds } = props;
@@ -45,6 +46,11 @@ const Leaderboard = (props) => {
     </div>
   );
 };
+
+Leaderboard.propTypes = {
+  userIds: PropTypes.array,
+  users: PropTypes.object,
+}
 
 const mapStateToProps = ({ users }) => {
   return {

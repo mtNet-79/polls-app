@@ -177,7 +177,7 @@ test("log in, answer poll, view leaderboard, view answered polls, create poll, s
   await user.click(within(pollBox).getByRole("button", { name: /show poll/i }));
 
   expect(screen.getByRole('heading', { name: /poll by/i })).toBeInTheDocument()
-  expect(screen.getByRole('img', { name: /avatar of /i })).toBeInTheDocument()
+  expect(screen.getByRole('img', { name: /icon/i })).toBeInTheDocument()
   const buttons = screen.getAllByRole('button', { name: /click/i })
   expect(buttons.length).toBe(2);
 

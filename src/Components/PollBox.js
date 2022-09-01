@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { formatDate } from "../utils/helpers";
 import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 const PollBox = (props) => {
   const navigate = useNavigate();
@@ -18,6 +19,10 @@ const PollBox = (props) => {
     </div>
   );
 };
+
+PollBox.propTypes = {
+  poll: PropTypes.object.isRequired,
+}
 
 const mapStateToProps = ({ polls }, { id }) => {
   const poll = polls[id];

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { handleAddPoll } from "../actions/createPoll";
+import PropTypes from 'prop-types';
 
 const CreatePoll = (props) => {
     
@@ -67,6 +68,10 @@ const CreatePoll = (props) => {
     </Fragment>
   );
 };
+
+CreatePoll.propTypes = {
+  authedUser: PropTypes.string.isRequired,
+}
 
 const mapStateToProps = ({authedUser}) => ({
     authedUser,

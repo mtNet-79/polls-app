@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
 import { Link } from "react-router-dom";
 import { autoComplete } from "../utils/helpers";
+import PropTypes from 'prop-types';
 
 const LogIn = (props) => {
   const [formReady, setFormReady] = useState(false);
@@ -102,9 +103,16 @@ const LogIn = (props) => {
   );
 };
 
+LogIn.propTypes = {
+  authedUser: PropTypes.string,
+  image: PropTypes.string.isRequired,
+  users: PropTypes.object.isRequired,
+}
+
 const mapStateToProps = ({ authedUser, users }, { image }) => ({
   authedUser,
   image,
   users,
 });
+
 export default connect(mapStateToProps)(LogIn);

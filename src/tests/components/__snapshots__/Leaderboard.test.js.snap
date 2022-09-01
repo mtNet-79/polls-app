@@ -22,7 +22,7 @@ exports[`should render leader table with all participant rankings/ with snapshot
       <ul>
         <li>
           <a
-            class=""
+            class="nav-link"
             href="/"
           >
             Home
@@ -31,7 +31,7 @@ exports[`should render leader table with all participant rankings/ with snapshot
         <li>
           <a
             aria-current="page"
-            class="active"
+            class="nav-link active"
             href="/leaderboard"
           >
             Leaderboard
@@ -39,7 +39,7 @@ exports[`should render leader table with all participant rankings/ with snapshot
         </li>
         <li>
           <a
-            class=""
+            class="nav-link"
             href="/add"
           >
             Post
@@ -59,6 +59,7 @@ exports[`should render leader table with all participant rankings/ with snapshot
         </li>
         <li>
           <a
+            class="nav-link"
             href="/"
           >
             Log out

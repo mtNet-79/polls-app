@@ -22,7 +22,7 @@ exports[`render to snapshot 1`] = `
       <ul>
         <li>
           <a
-            class=""
+            class="nav-link"
             href="/"
           >
             Home
@@ -30,7 +30,7 @@ exports[`render to snapshot 1`] = `
         </li>
         <li>
           <a
-            class=""
+            class="nav-link"
             href="/leaderboard"
           >
             Leaderboard
@@ -39,7 +39,7 @@ exports[`render to snapshot 1`] = `
         <li>
           <a
             aria-current="page"
-            class="active"
+            class="nav-link active"
             href="/add"
           >
             Post
@@ -59,6 +59,7 @@ exports[`render to snapshot 1`] = `
         </li>
         <li>
           <a
+            class="nav-link"
             href="/"
           >
             Log out

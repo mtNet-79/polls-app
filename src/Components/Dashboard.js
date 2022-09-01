@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useState } from "react";
 import Switch from "./Switch";
 import PollContainer from "./PollContainer";
+import PropTypes from "prop-types";
 
 const Dashboard = (props) => {
   const { users, authedUser, pollIds, polls } = props;
@@ -64,6 +65,13 @@ const Dashboard = (props) => {
     </div>
   );
 };
+
+Dashboard.propTypes = {
+  polls: PropTypes.object.isRequired,
+  authedUser: PropTypes.string,
+  users: PropTypes.object.isRequired,
+  pollIds: PropTypes.arrayOf(PropTypes.string)
+}
 const mapStateToProps = ({ polls, authedUser, users }) => ({
   authedUser,
   pollIds: Object.keys(polls).sort(

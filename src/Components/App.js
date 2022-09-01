@@ -3,7 +3,6 @@ import PollPage from "./PollPage";
 import { useState, useEffect, Fragment } from "react";
 import Dashboard from "./Dashboard";
 import { connect } from "react-redux";
-// import Nav from "./Nav";
 import LogIn from "./LogIn";
 import Leaderboard from "./Leaderboard";
 import AddUser from "./AddUser";
@@ -14,7 +13,7 @@ import CreatePoll from "./CreatePoll";
 import NotFound from "./NotFound";
 import RequireAuth from "./wrappers/RequireAuth";
 import Layout from "./wrappers/Layout";
-
+import PropTypes from 'prop-types';
 
 const App = (props) => {
   // console.log("app props: ", props);
@@ -53,32 +52,23 @@ const App = (props) => {
               <Route path="/login" element={<LogIn image={image} />} />
               <Route path="/" element={<Layout />}>
                 <Route index element={<Dashboard />} />
-                <Route
-                  path="add"
-                  element={
-                    <RequireAuth>
-                      <CreatePoll />
-                    </RequireAuth>
-                  }
-                />
-                <Route
-                  path="leaderboard"
-                  element={
-                    <RequireAuth>
-                      <Leaderboard />
-                    </RequireAuth>
-                  }
-                />
-                <Route
-                  path="questions/:pid"
-                  element={
-                    <RequireAuth>
-                      <PollPage image={image}  />
-                    </RequireAuth>
-                  }
-                />
+                <Route element={<RequireAuth />}>
+                  <Route path="add" element={<CreatePoll />} />
+                  <Route path="leaderboard" element={<Leaderboard />} />
+                  <Route
+                    path="questions/:pid"
+                    element={<PollPage image={image} />}
+                  />
+                </Route>
               </Route>
-              <Route path="*" element={<NotFound />} />
+              <Route
+                path="*"
+                element={
+                  <RequireAuth>
+                    <NotFound />
+                  </RequireAuth>
+                }
+              />
             </Routes>
           </Fragment>
         </div>
@@ -87,13 +77,15 @@ const App = (props) => {
   );
 };
 
-const mapStateToProps = ({ authedUser, loading, users }, props) => {
-  // const keys = Object.keys(users);
-  // const { location } = props.router;
+App.propTypes = {
+  authedUser:PropTypes.string,
+  loading: PropTypes.bool.isRequired, 
+}
+
+const mapStateToProps = ({ authedUser, loading }) => {
   return {
     loading,
-    authedUser,
-    avatarURL: users[authedUser]?.avatarURL,
+    authedUser
   };
 };
 

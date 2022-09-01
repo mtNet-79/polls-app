@@ -1,4 +1,5 @@
 import PollBox from "./PollBox";
+import PropTypes from 'prop-types';
 
 const PollContainer = ({ polls, answered }) => {
   return (
@@ -27,5 +28,10 @@ const PollContainer = ({ polls, answered }) => {
     </>
   );
 };
+
+PollContainer.propTypes = {
+  polls: PropTypes.array.isRequired,
+  answered: PropTypes.bool.isRequired,
+}
 
 export default PollContainer;

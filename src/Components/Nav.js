@@ -1,6 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
+import PropTypes from 'prop-types';
 
 const Nav = (props) => {
   // console.log("nav props: ", props);
@@ -17,13 +18,13 @@ const Nav = (props) => {
         <>
           <ul>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/" className="nav-link">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/leaderboard">Leaderboard</NavLink>
+              <NavLink to="/leaderboard" className="nav-link">Leaderboard</NavLink>
             </li>
             <li>
-              <NavLink to="/add">Post</NavLink>
+              <NavLink to="/add" className="nav-link">Post</NavLink>
             </li>
           </ul>
           <ul>
@@ -32,7 +33,7 @@ const Nav = (props) => {
               <span>{user.id}</span>
             </li>
             <li>
-              <Link to="/" onClick={hanldeLogOutOnClick}>
+              <Link to="/" onClick={hanldeLogOutOnClick} className="nav-link">
                 Log out
               </Link>
             </li>
@@ -51,6 +52,11 @@ const Nav = (props) => {
     </div>
   );
 };
+
+Nav.propTypes = {
+  authedUser: PropTypes.string,
+  users: PropTypes.object.isRequired
+}
 
 const mapStateToProps = ({ authedUser, users }) => ({
   authedUser,

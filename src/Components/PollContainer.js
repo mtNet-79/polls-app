@@ -3,24 +3,14 @@ import PollBox from "./PollBox";
 const PollContainer = ({ polls, answered }) => {
   return (
     <>
-      {polls.length !== 0 ? (
-        answered ? (
+      {polls.length !== 0 ? (        
           <ul className="flex-row-wrap">
             {polls.map((id) => (
               <li key={id}>
-                <PollBox id={id} answered={true}/>
+                <PollBox id={id} />
               </li>
             ))}
           </ul>
-        ) : (
-          <ul className="flex-row-wrap">
-            {polls.map((id) => (
-              <li key={id}>
-                <PollBox id={id} answered={false}/>
-              </li>
-            ))}
-          </ul>
-        )
       ) : (
         <div>
           {answered ? (

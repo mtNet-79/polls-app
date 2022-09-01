@@ -3,25 +3,18 @@ import PollPage from "./PollPage";
 import { useState, useEffect, Fragment } from "react";
 import Dashboard from "./Dashboard";
 import { connect } from "react-redux";
-import Nav from "./Nav";
+// import Nav from "./Nav";
 import LogIn from "./LogIn";
 import Leaderboard from "./Leaderboard";
 import AddUser from "./AddUser";
 import LoadingBar from "react-redux-loading-bar";
 import { Routes, Route } from "react-router-dom";
 import CreatePoll from "./CreatePoll";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import NotFound from "./NotFound";
-import RequireAuth from "./RequireAuth";
+import RequireAuth from "./wrappers/RequireAuth";
+import Layout from "./wrappers/Layout";
 
-const withRouter = (Component) => {
-  const ComponentWithRouterProp = (props) => {
-    let location = useLocation();
-    return <Component {...props} router={{ location }} />;
-  };
-
-  return ComponentWithRouterProp;
-};
 
 const App = (props) => {
   // console.log("app props: ", props);
@@ -48,75 +41,60 @@ const App = (props) => {
     authedUser === null ? generateRandomAvatar() : alreadyLoggedIn();
   }, [dispatch, authedUser]);
 
-
-
   return (
     <Fragment>
       <LoadingBar />
 
       {loading ? null : (
-        <div className="container">          
-            <Fragment>
-              {(props.location.pathname === "/" || authedUser) && <Nav />}
-              <Routes>
+        <div className="container">
+          <Fragment>
+            <Routes>
+              <Route path="/add-user" element={<AddUser image={image} />} />
+              <Route path="/login" element={<LogIn image={image} />} />
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Dashboard />} />
                 <Route
-                  exact
-                  path="/add-user"
-                  element={<AddUser image={image} />}
-                />
-                <Route path="/login" element={<LogIn image={image} />} />
-                <Route exact path="/" element={<Dashboard />} />
-                <Route exact path="/add" element=
-                  {<RequireAuth redirectTo="/login" navPath={props.location.pathname}>
-                    <CreatePoll />
-                  </RequireAuth>} />
-                <Route
-                  exact
-                  path="/leaderboard"
+                  path="add"
                   element={
-                    <RequireAuth redirectTo="/login" navPath={props.location.pathname}>
+                    <RequireAuth>
+                      <CreatePoll />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path="leaderboard"
+                  element={
+                    <RequireAuth>
                       <Leaderboard />
                     </RequireAuth>
                   }
                 />
-                 <Route
-                  exact
-                  path="/answered/questions/:pid"
-                  element={
-                    <RequireAuth redirectTo="/login" navPath={props.location.pathname}>
-                      <PollPage image={image} answered={true} />
-                    </RequireAuth>
-                  }
-                />
                 <Route
-                  exact
-                  path="/questions/:pid"
+                  path="questions/:pid"
                   element={
-                    <RequireAuth redirectTo="/login" navPath={props.location.pathname}>
-                      <PollPage image={image} answered={false} />
+                    <RequireAuth>
+                      <PollPage image={image}  />
                     </RequireAuth>
                   }
                 />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Fragment>
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Fragment>
         </div>
       )}
     </Fragment>
   );
 };
 
-
-
 const mapStateToProps = ({ authedUser, loading, users }, props) => {
   // const keys = Object.keys(users);
-  const { location } = props.router;
+  // const { location } = props.router;
   return {
     loading,
     authedUser,
     avatarURL: users[authedUser]?.avatarURL,
-    location,
   };
 };
 
-export default withRouter(connect(mapStateToProps)(App));
+export default connect(mapStateToProps)(App);

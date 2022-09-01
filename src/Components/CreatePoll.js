@@ -34,6 +34,7 @@ const CreatePoll = (props) => {
 
   return (
     <Fragment>
+     
       <h1>Would you rather</h1>
       <h3 className="light">Create a Poll</h3>
       <form className="add-new" onSubmit={handleSubmit}>

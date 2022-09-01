@@ -6,8 +6,6 @@ import "../styles/nowhere.scss";
 const Nowhere = (props) => {
  
   const navigate = useNavigate();
-  
-  console.log("props not found: ", props);
 
   useEffect(() => {
     document.body.style.backgroundImage = `url('https://assets.codepen.io/1538474/star.svg'), linear-gradient(to bottom, #05007A, #4D007D)`;
@@ -27,8 +25,8 @@ const Nowhere = (props) => {
         longer here.
       </p>
       <div align="center">
-        <span className="btn-back" onClick={() => navigate(-1)}>
-          Back to previous page
+        <span className="btn-back" onClick={() => navigate("/")}>
+          Back to Home page
         </span>
         
       </div>

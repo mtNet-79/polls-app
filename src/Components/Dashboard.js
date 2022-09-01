@@ -19,7 +19,7 @@ const Dashboard = (props) => {
       : []
     : [];
 
-  const unansweredPolls =
+  const unansweredPollsSorted =
     answeredPolls.length !== 0
       ? pollIds.filter((pid) => !answeredPolls.includes(pid))
       : pollIds;
@@ -48,14 +48,18 @@ const Dashboard = (props) => {
             <h2 className="polls-header center">New Polls</h2>
           )}
         </div>
-        {authedUser 
-          ? toggleValue ? (
-            <PollContainer polls={unansweredPolls} answered={!toggleValue} />
+        {authedUser ? (
+          toggleValue ? (
+            <PollContainer polls={unansweredPollsSorted} answered={!toggleValue} />
           ) : (
-            <PollContainer polls={answeredPollsSorted} answered={!toggleValue} />
+            <PollContainer
+              polls={answeredPollsSorted}
+              answered={!toggleValue}
+            />
           )
-          : <PollContainer polls={unansweredPolls} answered={false} />
-        }
+        ) : (
+          <PollContainer polls={unansweredPollsSorted} answered={false} />
+        )}
       </div>
     </div>
   );

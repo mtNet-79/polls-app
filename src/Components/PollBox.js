@@ -4,11 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 const PollBox = (props) => {
   const navigate = useNavigate();
-  const { poll, answered } = props;
+  const { poll } = props;
   const showPoll = () => {
-    answered
-      ? navigate(`answered/questions/${poll.id}`)
-      : navigate(`/questions/${poll.id}`);
+    navigate(`/questions/${poll.id}`);
   };
   return (
     <div className="poll-box">
@@ -21,13 +19,10 @@ const PollBox = (props) => {
   );
 };
 
-const mapStateToProps = ({ polls }, { id, answered }) => {
+const mapStateToProps = ({ polls }, { id }) => {
   const poll = polls[id];
-
   return {
     poll,
-    answered,
-    
   };
 };
 

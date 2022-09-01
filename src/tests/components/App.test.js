@@ -118,18 +118,19 @@ test("log in, answer poll, view leaderboard, view answered polls, create poll, s
     }
   );
 
-
+//has header
   const header = screen.getByRole("heading", { name: /new polls/i });
   expect(header).toBeInTheDocument();
-
+//has nav bar
+//click nav bar
   await user.click(screen.getByRole("link", { name: /sign in/i }));
-
+//credentials
   await user.type(screen.getByLabelText(/user/i), "mthornton");
   const userInput = screen.getByRole("textbox", { name: /user/i });
   expect(userInput.value).toBe("mthornton");
 
   await user.type(screen.getByLabelText(/password/i), "elephants");
-
+//log in
   user.click(screen.getByRole("button", { name: /log in/i }));
   await waitForElementToBeRemoved(() =>
     screen.getByRole("button", { name: /log in/i })
@@ -142,7 +143,6 @@ test("log in, answer poll, view leaderboard, view answered polls, create poll, s
 
   // //has naviagation
   //has all nav links present
-
   const homeLink = screen.getByRole("link", { name: /home/i });
   expect(homeLink).toBeInTheDocument();
 
@@ -183,19 +183,10 @@ test("log in, answer poll, view leaderboard, view answered polls, create poll, s
 
   // screen.logTestingPlaygroundURL()
 
-  //TODO:: answer poll
-  await user.click(buttons[0])
-
-
-  const newButtons = screen.queryAllByRole('button', { name: /click/i })
-  expect(newButtons.length).toBe(0);
-
-
+  //answer poll
+  await user.click(buttons[0]);
   await user.click(screen.getByRole('link', {name: /leaderboard/i}))
  //back at leaderboard
- const table = screen.getByRole("table", {
-  name: /leaderboard/i,
-});
 //header rows
 const headerRow = screen.getByRole("rowheader");
 expect(headerRow).toBeInTheDocument();

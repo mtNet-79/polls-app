@@ -1,26 +1,26 @@
 import { connect } from "react-redux";
 import { handleAnswerPoll } from "../actions/answerPoll";
-import { Fragment } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Fragment, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 const OPTION_ONE = "optionOne";
 const OPTION_TWO = "optionTwo";
 
-const withRouter = (Component) => {
-  const ComponentWithRouterProp = (props) => {
-    let location = useLocation();
-    let navigate = useNavigate();
-    let params = useParams();
-    return <Component {...props} router={{ location, navigate, params }} />;
-  };
-
-  return ComponentWithRouterProp;
-};
-
 const PollPage = (props) => {
   const navigate = useNavigate();
-  const { dispatch, authedUser, pid, polls, users, answered } = props;
+  let params = useParams();
+
+  const { pid } = params
+  const { dispatch, authedUser, polls, users } = props;
+  
+  useEffect(() => {
+    const validPollIds = Object.keys(polls);
+    const pidIsValid =
+      validPollIds.filter((vpid) => vpid === pid).length > 0 ? true : false;
+    pidIsValid ? void 0 : navigate("/error");
+  }, [pid, polls, navigate]);
 
   const usersChoice = users[authedUser].answers[pid];
+  var answered = usersChoice ? true : false;
 
   const classVarOne = usersChoice === "optionOne" ? "choice" : "pass";
   const classVarTwo = usersChoice === "optionTwo" ? "choice" : "pass";
@@ -52,46 +52,48 @@ const PollPage = (props) => {
       dispatch(handleAnswerPoll(authedUser, pid, OPTION_ONE));
     else if (e.target.id === OPTION_TWO)
       dispatch(handleAnswerPoll(authedUser, pid, OPTION_TWO));
-    navigate(`/answered/questions/${pid}`)
+    navigate(`/questions/${pid}`);
   };
   return (
     <Fragment>
-      <h3>Poll by {users[polls[pid].author].name}</h3>
+      <h3>Poll by {users[polls[pid]?.author]?.name}</h3>
       <br></br>
       <img
-        src={users[polls[pid].author].avatarURL}
-        alt={`Avatar of ${polls[pid].author}`}
+        src={users[polls[pid]?.author]?.avatarURL}
+        alt={`Avatar of ${polls[pid]?.author}`}
         className="avatar center"
       />
-      
+
       <h3>Would you rather?</h3>
       <br></br>
-      {answered ? (       
-        <><div className="flex-row poll">
-        <div className={`choice-container ${classVarOne}`}>
-          {usersChoice === "optionOne"}
-          <div className="center questionBox">
-            {polls[pid].optionOne.text}
+      {answered ? (
+        <>
+          <div className="flex-row poll">
+            <div className={`choice-container ${classVarOne}`}>
+              {usersChoice === "optionOne"}
+              <div className="center questionBox">
+                {polls[pid].optionOne.text}
+              </div>
+              <p className="center">{calcStats().optionOneVotesString}</p>
+            </div>
+            <div className={`choice-container ${classVarTwo}`}>
+              <div className="center questionBox">
+                {polls[pid].optionTwo.text}
+              </div>
+              <p className="center">{calcStats().optionTwoVotesString}</p>
+            </div>
           </div>
-          <p className="center">{calcStats().optionOneVotesString}</p>
-        </div>
-        <div className={`choice-container ${classVarTwo}`}>
-          <div className="center questionBox">
-            {polls[pid].optionTwo.text}
+          <br></br>
+          <br></br>
+          <div className="colorRow">
+            Your Choice : <span className="colorSpan"></span>
           </div>
-          <p className="center">{calcStats().optionTwoVotesString}</p>
-        </div>
-      </div>
-      <br></br>
-      <br></br>
-      <div className="colorRow">Your Choice : <span className="colorSpan"></span></div>
-      </>
-          
+        </>
       ) : (
         <div className="flex-row poll">
           <div className="choice-container">
             <div className="center questionBox">
-              {polls[pid].optionOne.text}
+              {polls[pid]?.optionOne.text}
             </div>
             <button
               className="btn-answer"
@@ -103,7 +105,7 @@ const PollPage = (props) => {
           </div>
           <div className="choice-container">
             <div className="center questionBox">
-              {polls[pid].optionTwo.text}
+              {polls[pid]?.optionTwo.text}
             </div>
             <button
               className="btn-answer"
@@ -120,17 +122,15 @@ const PollPage = (props) => {
 };
 
 const mapStateToProps = ({ authedUser, polls, users }, props) => {
-  const { pid } = props.router.params;
-  const { image, answered } = props;
+ 
+  const { image } = props;
 
   return {
     authedUser,
-    pid,
     polls,
     users,
     image,
-    answered,
   };
 };
 
-export default withRouter(connect(mapStateToProps)(PollPage));
+export default connect(mapStateToProps)(PollPage);

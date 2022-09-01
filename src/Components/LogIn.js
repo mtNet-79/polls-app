@@ -11,18 +11,18 @@ const LogIn = (props) => {
   const location = useLocation();
   const { state } = location;
   const redirectedFrom = state?.from;
-  const { dispatch, image, users } = props;
+  const { dispatch, image, users, authedUser } = props;
   const userRef = useRef("");
   const passwordRef = useRef("");
 
   useEffect(() => {
-    if(props.authedUser) {
-      const { from } = location.state || { from: { pathname: "/" } };
-      console.log("from: ", from);
-      navigate(from, { replace: true });
+    if(authedUser) {
+      const { from } = redirectedFrom || { from: { pathname: "/" } };
+      console.log("from : ", from);
+      navigate(from);
     }
   });
-  
+
   const checkForm = (e) => {
     if (e.target.id === "userName") autoComplete(e.target, users);
 
@@ -40,10 +40,11 @@ const LogIn = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+ 
     if (users[userRef.current.value]) {
       if (users[userRef.current.value].password === passwordRef.current.value) {
         dispatch(setAuthedUser(userRef.current.value));
-        redirectedFrom ? navigate(redirectedFrom, { replace: true }) : navigate("/", { replace: true});
+        redirectedFrom ? navigate(redirectedFrom) : navigate("/");
       } else {
         alert("Wrong password. Try again.");
       }

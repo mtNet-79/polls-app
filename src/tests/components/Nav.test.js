@@ -46,8 +46,8 @@ describe("nav clicks", () => {
   it("should navigate from home on link click", async () => {
     const user = userEvent.setup();
 
-    const { store, container } = renderWithProviders(<App />, {
-      route: "/dashboard",
+    const { store } = renderWithProviders(<App />, {
+      route: "/",
       authedUser: "mthornton",
     });
 
